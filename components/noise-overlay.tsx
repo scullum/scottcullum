@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useSettings } from "@/contexts/settings-context";
 
 const NoiseOverlay = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { isAnimationEnabled, isDarkMode } = useSettings();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -11,6 +13,12 @@ const NoiseOverlay = () => {
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    
+    // Clear the canvas if animations are disabled
+    if (!isAnimationEnabled) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
 
     let animationFrameId: number;
     let lastFrameTime = 0;
@@ -51,7 +59,7 @@ const NoiseOverlay = () => {
           data[i] = value; // red
           data[i + 1] = value; // green
           data[i + 2] = value; // blue
-          data[i + 3] = 50; // alpha (increased opacity)
+          data[i + 3] = isDarkMode ? 50 : 30; // alpha (adjusted for light/dark mode)
         }
 
         // Create an offscreen canvas for the noise texture
@@ -111,14 +119,24 @@ const NoiseOverlay = () => {
       clearTimeout(resizeTimeout);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isAnimationEnabled, isDarkMode]);
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 1000 }}>
+    <div 
+      className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none" 
+      style={{ 
+        zIndex: 1000,
+        opacity: isAnimationEnabled ? 1 : 0,
+        transition: "opacity 0.3s ease-out"
+      }}
+    >
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full opacity-20"
-        style={{ mixBlendMode: "overlay" }}
+        style={{ 
+          mixBlendMode: isDarkMode ? "overlay" : "multiply",
+          opacity: isDarkMode ? 0.2 : 0.1
+        }}
         aria-hidden="true"
       />
     </div>
