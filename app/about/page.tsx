@@ -1,8 +1,9 @@
 import GlitchCard from "@/components/glitch-card"
 import { FileText } from "lucide-react"
 import aboutData from "@/data/about.json"
-import { SkewedH1, SkewedH2, SkewedP } from "@/components/skewed-elements"
+import { SkewedH1, SkewedH2 } from "@/components/skewed-elements"
 import dynamic from "next/dynamic"
+import { SkewedParagraphGroup } from "@/components/skewed-paragraph-group"
 
 // Import the DistortedImage component dynamically
 const DistortedImage = dynamic(() => import("@/components/distorted-image"), {
@@ -18,13 +19,13 @@ export default function About() {
         <div>
           <SkewedH2 className="text-2xl md:text-3xl mb-6">{aboutData.intro.title}</SkewedH2>
 
-          <div className="space-y-8">
+          <SkewedParagraphGroup className="space-y-8" intensity="medium">
             {aboutData.intro.paragraphs.map((paragraph, index) => (
-              <SkewedP key={index} className="text-lg">
+              <p key={index} className="text-lg">
                 <span dangerouslySetInnerHTML={{ __html: paragraph }} />
-              </SkewedP>
+              </p>
             ))}
-          </div>
+          </SkewedParagraphGroup>
         </div>
 
         <div>

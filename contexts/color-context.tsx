@@ -5,33 +5,36 @@ import type React from "react"
 import { createContext, useContext, useEffect, useState, useRef } from "react"
 import { usePathname } from "next/navigation"
 
-// Define our color options
+// Define our color options with RGB values for transparency effects
 export const colorOptions = [
-  { name: "orange", value: "#ff3c00" },
-  { name: "electric-blue", value: "#00f0ff" },
-  { name: "acid-green", value: "#aaff00" },
-  { name: "hot-pink", value: "#ff00aa" },
-  { name: "yellow", value: "#ffcc00" },
+  { name: "orange", value: "#ff3c00", rgb: "255, 60, 0" },
+  { name: "electric-blue", value: "#00f0ff", rgb: "0, 240, 255" },
+  { name: "acid-green", value: "#aaff00", rgb: "170, 255, 0" },
+  { name: "hot-pink", value: "#ff00aa", rgb: "255, 0, 170" },
+  { name: "yellow", value: "#ffcc00", rgb: "255, 204, 0" },
 ]
 
 type ColorContextType = {
   accentColor: string
+  accentColorRgb: string
   accentColorName: string
   setColor: (color: string) => void
 }
 
 const ColorContext = createContext<ColorContextType>({
   accentColor: colorOptions[0].value,
+  accentColorRgb: colorOptions[0].rgb,
   accentColorName: colorOptions[0].name,
   setColor: () => {},
 })
 
 // Helper function to update CSS with the accent color
-function updateAccentColorStyles(colorValue: string) {
+function updateAccentColorStyles(colorValue: string, colorRgb: string) {
   if (typeof window === "undefined") return
   
-  // Update CSS variable
+  // Update CSS variables
   document.documentElement.style.setProperty("--accent", colorValue)
+  document.documentElement.style.setProperty("--accent-rgb", colorRgb)
   
   // Apply to all hover states
   const existingStyle = document.querySelector("style[data-accent-hover]")
@@ -51,6 +54,7 @@ function updateAccentColorStyles(colorValue: string) {
 
 export function ColorProvider({ children }: { children: React.ReactNode }) {
   const [accentColor, setAccentColor] = useState(colorOptions[0].value)
+  const [accentColorRgb, setAccentColorRgb] = useState(colorOptions[0].rgb)
   const [accentColorName, setAccentColorName] = useState(colorOptions[0].name)
   const pathname = usePathname()
   const previousColorRef = useRef<string>(colorOptions[0].value)
@@ -69,11 +73,12 @@ export function ColorProvider({ children }: { children: React.ReactNode }) {
       } while (selectedColor.value === previousColorRef.current && colorOptions.length > 1)
 
       setAccentColor(selectedColor.value)
+      setAccentColorRgb(selectedColor.rgb)
       setAccentColorName(selectedColor.name)
       previousColorRef.current = selectedColor.value
 
       // Update CSS styles with the new color
-      updateAccentColorStyles(selectedColor.value)
+      updateAccentColorStyles(selectedColor.value, selectedColor.rgb)
     }
   }, [pathname]) // Re-run when pathname changes
 
@@ -81,15 +86,16 @@ export function ColorProvider({ children }: { children: React.ReactNode }) {
     const colorOption = colorOptions.find((c) => c.value === colorValue)
     if (colorOption) {
       setAccentColor(colorOption.value)
+      setAccentColorRgb(colorOption.rgb)
       setAccentColorName(colorOption.name)
       previousColorRef.current = colorOption.value
       
       // Update CSS styles with the new color
-      updateAccentColorStyles(colorOption.value)
+      updateAccentColorStyles(colorOption.value, colorOption.rgb)
     }
   }
 
-  return <ColorContext.Provider value={{ accentColor, accentColorName, setColor }}>{children}</ColorContext.Provider>
+  return <ColorContext.Provider value={{ accentColor, accentColorRgb, accentColorName, setColor }}>{children}</ColorContext.Provider>
 }
 
 export function useAccentColor() {
