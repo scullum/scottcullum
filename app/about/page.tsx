@@ -1,20 +1,28 @@
 import GlitchCard from "@/components/glitch-card"
-import Image from "next/image"
 import { FileText } from "lucide-react"
 import aboutData from "@/data/about.json"
+import { SkewedH1, SkewedH2, SkewedP } from "@/components/skewed-elements"
+import dynamic from "next/dynamic"
+
+// Import the DistortedImage component dynamically
+const DistortedImage = dynamic(() => import("@/components/distorted-image"), {
+  ssr: true
+})
 
 export default function About() {
   return (
     <div className="py-12">
-      <h1 className="text-5xl md:text-6xl mb-12">About</h1>
+      <SkewedH1 className="text-5xl md:text-6xl mb-12">About</SkewedH1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
-          <h2 className="text-2xl md:text-3xl mb-6">{aboutData.intro.title}</h2>
+          <SkewedH2 className="text-2xl md:text-3xl mb-6">{aboutData.intro.title}</SkewedH2>
 
           <div className="space-y-8">
             {aboutData.intro.paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-lg" dangerouslySetInnerHTML={{ __html: paragraph }} />
+              <SkewedP key={index} className="text-lg">
+                <span dangerouslySetInnerHTML={{ __html: paragraph }} />
+              </SkewedP>
             ))}
           </div>
         </div>
@@ -22,11 +30,13 @@ export default function About() {
         <div>
           <GlitchCard className="h-full">
             <div className="relative w-full h-[400px] mb-4 overflow-hidden">
-              <Image
-                src={aboutData.intro.photo.src || "/placeholder.svg"}
-                alt={aboutData.intro.photo.alt}
-                fill
-                className="object-cover"
+              <DistortedImage
+                src="/me.webp"
+                alt="Scott M. Cullum"
+                width={600}
+                height={800}
+                className="w-full h-full object-cover"
+                distortionIntensity="medium"
                 priority
               />
             </div>
@@ -37,7 +47,7 @@ export default function About() {
 
       <div className="mt-16">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl md:text-3xl">{aboutData.experience.title}</h2>
+          <SkewedH2 className="text-2xl md:text-3xl">{aboutData.experience.title}</SkewedH2>
 
           <a
             href="/scott-cullum-resume.pdf"

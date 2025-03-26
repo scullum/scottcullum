@@ -48,10 +48,11 @@ const RotatingText = ({ phrases, interval = 4000, className = "" }: RotatingText
   }, [className, isVisible])
   
   return (
-    <div className="relative h-auto min-h-[2.5em] overflow-visible">
+    <div className="relative h-auto min-h-[2.5em] overflow-visible max-w-full">
       <div
         className={combinedClassName}
         data-text={currentPhrase}
+        style={{ maxWidth: '100%', display: 'inline-block' }}
       >
         {currentPhrase}
       </div>
