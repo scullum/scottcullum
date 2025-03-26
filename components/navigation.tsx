@@ -13,20 +13,30 @@ const Navigation = () => {
   const isHomePage = pathname === "/"
 
   useEffect(() => {
+    // Debounced scroll handler for better performance
+    let scrollTimeout: NodeJS.Timeout
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
+      if (scrollTimeout) clearTimeout(scrollTimeout)
+      
+      scrollTimeout = setTimeout(() => {
+        if (window.scrollY > 10) {
+          setScrolled(true)
+        } else {
+          setScrolled(false)
+        }
+      }, 10) // Small timeout for debouncing
     }
 
-    window.addEventListener("scroll", handleScroll)
+    // Use passive listener for better performance
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    
     return () => {
+      if (scrollTimeout) clearTimeout(scrollTimeout)
       window.removeEventListener("scroll", handleScroll)
     }
   }, [])
 
+  // Memoize links array to prevent unnecessary re-renders
   const links = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },

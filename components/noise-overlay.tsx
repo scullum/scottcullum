@@ -13,29 +13,20 @@ const NoiseOverlay = () => {
     if (!ctx) return
 
     let animationFrameId: number
+    let lastFrameTime = 0
+    const frameInterval = 1000 / 15 // Limit to 15 FPS for better performance
 
-    const resize = () => {
-      if (canvas && window) {
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight
-      }
-    }
-
-    // Initial resize
-    resize()
-
-    // Add resize listener
-    window.addEventListener("resize", resize)
-
-    const generateNoise = () => {
-      if (!canvas || !ctx || canvas.width === 0 || canvas.height === 0) {
-        // Skip if canvas dimensions aren't valid yet
-        animationFrameId = requestAnimationFrame(generateNoise)
-        return
-      }
+    // Pre-generate a noise texture at a lower resolution for better performance
+    const generateNoiseTexture = () => {
+      if (!canvas || !ctx || canvas.width === 0 || canvas.height === 0) return
 
       try {
-        const imageData = ctx.createImageData(canvas.width, canvas.height)
+        // Use a smaller size for the noise texture (better performance)
+        const scale = 0.25 // 25% of the original size
+        const scaledWidth = Math.floor(canvas.width * scale)
+        const scaledHeight = Math.floor(canvas.height * scale)
+        
+        const imageData = ctx.createImageData(scaledWidth, scaledHeight)
         const data = imageData.data
 
         for (let i = 0; i < data.length; i += 4) {
@@ -46,20 +37,61 @@ const NoiseOverlay = () => {
           data[i + 3] = 10 // alpha (low opacity)
         }
 
-        ctx.putImageData(imageData, 0, 0)
-      } catch (error) {
-        console.error("Error generating noise:", error)
-      }
+        // Create an offscreen canvas for the noise texture
+        const offscreenCanvas = new OffscreenCanvas(scaledWidth, scaledHeight)
+        const offscreenCtx = offscreenCanvas.getContext("2d")
+        if (!offscreenCtx) return
 
-      animationFrameId = requestAnimationFrame(generateNoise)
+        offscreenCtx.putImageData(imageData, 0, 0)
+        
+        // Clear the main canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        
+        // Draw the scaled noise texture to the main canvas
+        ctx.imageSmoothingEnabled = false // Disable smoothing for pixelated effect
+        ctx.drawImage(offscreenCanvas, 0, 0, canvas.width, canvas.height)
+      } catch (error) {
+        console.error("Error generating noise texture:", error)
+      }
+    }
+    
+    const resize = () => {
+      if (canvas && window) {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        // Generate a new noise texture when resizing
+        generateNoiseTexture()
+      }
+    }
+
+    // Initial resize
+    resize()
+
+    // Add resize listener with debounce
+    let resizeTimeout: NodeJS.Timeout
+    const debouncedResize = () => {
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(resize, 200)
+    }
+    window.addEventListener("resize", debouncedResize)
+
+    const animate = (timestamp: number) => {
+      // Throttle frame rate for better performance
+      if (timestamp - lastFrameTime >= frameInterval) {
+        lastFrameTime = timestamp
+        generateNoiseTexture()
+      }
+      
+      animationFrameId = requestAnimationFrame(animate)
     }
 
     // Start the animation
-    generateNoise()
+    animationFrameId = requestAnimationFrame(animate)
 
     // Cleanup
     return () => {
-      window.removeEventListener("resize", resize)
+      window.removeEventListener("resize", debouncedResize)
+      clearTimeout(resizeTimeout)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])

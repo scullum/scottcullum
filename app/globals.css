@@ -39,74 +39,119 @@
   h4,
   h5,
   h6 {
-    @apply font-mono font-bold uppercase tracking-tight;
+    font-family: var(--font-space-mono), monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
   }
 
   h1 {
-    @apply text-4xl md:text-6xl;
+    font-size: 2.25rem; /* text-4xl */
+  }
+
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 3.75rem; /* md:text-6xl */
+    }
   }
 
   h2 {
-    @apply text-3xl md:text-4xl;
+    font-size: 1.875rem; /* text-3xl */
+  }
+
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 2.25rem; /* md:text-4xl */
+    }
   }
 
   h3 {
-    @apply text-2xl md:text-3xl;
+    font-size: 1.5rem; /* text-2xl */
+  }
+
+  @media (min-width: 768px) {
+    h3 {
+      font-size: 1.875rem; /* md:text-3xl */
+    }
   }
 
   a {
-    @apply text-accent transition-all duration-200;
+    color: var(--accent);
+    transition: all 0.2s;
   }
 
   main {
-    @apply pt-24; /* Add padding for sticky header */
+    padding-top: 6rem; /* pt-24, Add padding for sticky header */
   }
 }
 
 @layer components {
   .punk-border {
-    @apply border-2 border-white relative;
+    border: 2px solid white;
+    position: relative;
   }
 
   .punk-border::after {
     content: "";
-    @apply absolute inset-0 border-2 border-white -translate-x-1 -translate-y-1 pointer-events-none;
+    position: absolute;
+    inset: 0;
+    border: 2px solid white;
+    transform: translate(-0.25rem, -0.25rem);
+    pointer-events: none;
   }
 
   .punk-card {
-    @apply bg-black border-2 border-white p-6 relative overflow-hidden;
+    background-color: black;
+    border: 2px solid white;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
   }
 
   .punk-card::after {
     content: "";
-    @apply absolute inset-0 border-2 border-white -translate-x-1 -translate-y-1 pointer-events-none;
+    position: absolute;
+    inset: 0;
+    border: 2px solid white;
+    transform: translate(-0.25rem, -0.25rem);
+    pointer-events: none;
   }
 
   /* Updated nav-link styles to remove underline and accent color on hover */
   .nav-link {
-    @apply font-mono uppercase text-white transition-colors duration-200 relative;
+    font-family: var(--font-space-mono), monospace;
+    text-transform: uppercase;
+    color: white;
+    transition: color 0.2s;
+    position: relative;
   }
 
   .nav-link::after {
     content: "";
-    @apply absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-200;
+    position: absolute;
+    left: 0;
+    bottom: -0.25rem;
+    width: 0;
+    height: 0.125rem;
+    background-color: white;
+    transition: all 0.2s;
   }
 
   .nav-link:hover::after {
-    @apply w-full;
+    width: 100%;
   }
 
   .nav-link.active {
-    @apply text-white;
+    color: white;
   }
 
   .nav-link.active::after {
-    @apply w-full;
+    width: 100%;
   }
 }
 
 .xerox-bg {
-  background-image: url("/textures/xerox.png");
+  background-image: url("/textures/xerox.jpg");
   background-repeat: repeat;
   background-size: 500px;
   mix-blend-mode: overlay;
@@ -114,7 +159,7 @@
 }
 
 .accent-text {
-  @apply text-accent;
+  color: var(--accent);
 }
 
 .glitch {
