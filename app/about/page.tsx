@@ -1,14 +1,14 @@
-import GlitchCard from "@/components/glitch-card"
-import { FileText } from "lucide-react"
-import aboutData from "@/data/about.json"
-import { SkewedH1, SkewedH2 } from "@/components/skewed-elements"
-import dynamic from "next/dynamic"
-import { SkewedParagraphGroup } from "@/components/skewed-paragraph-group"
+import GlitchCard from "@/components/glitch-card";
+import { FileText } from "lucide-react";
+import aboutData from "@/data/about.json";
+import { SkewedH1, SkewedH2 } from "@/components/skewed-elements";
+import dynamic from "next/dynamic";
+import { SkewedParagraphGroup } from "@/components/skewed-paragraph-group";
 
 // Import the DistortedImage component dynamically
 const DistortedImage = dynamic(() => import("@/components/distorted-image"), {
-  ssr: true
-})
+  ssr: true,
+});
 
 export default function About() {
   return (
@@ -17,7 +17,9 @@ export default function About() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
-          <SkewedH2 className="text-2xl md:text-3xl mb-6">{aboutData.intro.title}</SkewedH2>
+          <SkewedH2 className="text-2xl md:text-3xl mb-6">
+            {aboutData.intro.title}
+          </SkewedH2>
 
           <SkewedParagraphGroup className="space-y-8" intensity="medium">
             {aboutData.intro.paragraphs.map((paragraph, index) => (
@@ -41,14 +43,15 @@ export default function About() {
                 priority
               />
             </div>
-            <p className="text-sm font-mono text-center">{aboutData.intro.photo.caption}</p>
           </GlitchCard>
         </div>
       </div>
 
       <div className="mt-16">
         <div className="flex justify-between items-center mb-6">
-          <SkewedH2 className="text-2xl md:text-3xl">{aboutData.experience.title}</SkewedH2>
+          <SkewedH2 className="text-2xl md:text-3xl">
+            {aboutData.experience.title}
+          </SkewedH2>
 
           <a
             href="/scott-cullum-resume.pdf"
@@ -63,14 +66,20 @@ export default function About() {
         <div className="space-y-8">
           {aboutData.experience.positions.map((position, index) => (
             <div key={index} className="border-l-2 border-accent pl-6 py-2">
-              <h3 className="text-xl mb-1">{position.company}</h3>
+              <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-1">
+                <h3 className="text-xl">{position.company}</h3>
+                {position.duration && (
+                  <span className="text-sm font-mono text-[var(--muted)]">
+                    {position.duration.startDate} — {position.duration.endDate}
+                  </span>
+                )}
+              </div>
               <p className="text-accent mb-2">{position.title}</p>
-              <p>{position.description}</p>
+              {position.description && <p>{position.description}</p>}
             </div>
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 }
-
