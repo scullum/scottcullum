@@ -19,6 +19,14 @@ const SkewProvider = dynamic(
   { ssr: true }
 );
 
+// Import the SettingsProvider for user preferences
+const SettingsProvider = dynamic(
+  () => import("@/contexts/settings-context").then(mod => mod.SettingsProvider),
+  { ssr: true }
+);
+
+
+
 // SVG Filters for glitch effects
 const GlitchFilters = () => (
   <svg className="absolute -z-10 opacity-0 pointer-events-none" aria-hidden="true">
@@ -79,19 +87,22 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${spaceMono.variable} font-sans bg-black text-white min-h-screen relative`}
+        className={`${inter.variable} ${spaceMono.variable} font-sans min-h-screen relative transition-colors duration-300`}
       >
-        <ClientWrapper>
-          <GlitchFilters />
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-            <main>
-              <SkewProvider>
-                {children}
-              </SkewProvider>
-            </main>
-          </div>
-          <Footer />
-        </ClientWrapper>
+        <SettingsProvider>
+          <ClientWrapper>
+            <GlitchFilters />
+
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+              <main>
+                <SkewProvider>
+                  {children}
+                </SkewProvider>
+              </main>
+            </div>
+            <Footer />
+          </ClientWrapper>
+        </SettingsProvider>
       </body>
     </html>
   );

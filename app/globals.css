@@ -3,8 +3,31 @@
 @tailwind utilities;
 
 :root {
+  /* Shared variables */
   --accent: #ff3c00;
+  --accent-rgb: 255, 60, 0;
   --noise-opacity: 0.05;
+  
+  /* Dark mode variables (default) */
+  --background: #000000;
+  --foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.7);
+  --muted-foreground: rgba(255, 255, 255, 0.5);
+  --border: rgba(255, 255, 255, 0.2);
+  --card: rgba(0, 0, 0, 0.8);
+  --card-foreground: #ffffff;
+}
+
+/* Light mode variables - craft paper theme */
+.light-mode {
+  --background: #f5f0e1; /* Craft paper color */
+  --foreground: #2d2a24; /* Dark brown for text */
+  --muted: rgba(45, 42, 36, 0.7); /* Muted dark brown */
+  --muted-foreground: rgba(45, 42, 36, 0.5); /* More muted dark brown */
+  --border: rgba(45, 42, 36, 0.3); /* Border color */
+  --card: rgba(245, 240, 225, 0.8); /* Translucent craft paper */
+  --card-foreground: #2d2a24; /* Dark brown for card text */
+  --nav-border: rgba(0, 0, 0, 0.1); /* Thin black border for navigation */
 }
 
 /* Add this to ensure the accent color is applied */
@@ -31,6 +54,34 @@
 @layer base {
   body {
     @apply antialiased;
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Navigation link styling */
+  .nav-link {
+    position: relative;
+    padding-bottom: 2px;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+  }
+  
+  .nav-link:hover::after {
+    background-color: var(--accent);
+  }
+  
+  .nav-link.active::after {
+    background-color: var(--accent);
   }
 
   h1,
