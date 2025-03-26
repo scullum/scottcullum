@@ -4,10 +4,9 @@ import thoughtsData from "@/data/thoughts.json"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 
-interface ThoughtPageProps {
-  params: {
-    id: string
-  }
+// Define the params type for this specific page
+type ThoughtPageParams = {
+  id: string
 }
 
 export function generateStaticParams() {
@@ -16,7 +15,7 @@ export function generateStaticParams() {
   }))
 }
 
-export default function ThoughtPage({ params }: ThoughtPageProps) {
+export default function ThoughtPage({ params }: { params: ThoughtPageParams }) {
   const post = thoughtsData.posts.find((p) => p.id === params.id)
 
   if (!post) {

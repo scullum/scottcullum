@@ -5,10 +5,9 @@ import { ArrowLeft } from "lucide-react"
 import { notFound } from "next/navigation"
 import GlitchCard from "@/components/glitch-card"
 
-interface WorkDetailPageProps {
-  params: {
-    id: string
-  }
+// Define the params type for this specific page
+type WorkDetailPageParams = {
+  id: string
 }
 
 export function generateStaticParams() {
@@ -17,7 +16,7 @@ export function generateStaticParams() {
   }))
 }
 
-export default function WorkDetailPage({ params }: WorkDetailPageProps) {
+export default function WorkDetailPage({ params }: { params: WorkDetailPageParams }) {
   const project = workData.projects.find((p) => p.id === params.id)
 
   if (!project) {
@@ -68,8 +67,8 @@ export default function WorkDetailPage({ params }: WorkDetailPageProps) {
         <h2 className="text-3xl mb-6">Project Overview</h2>
         <p className="text-lg mb-4">{project.summary}</p>
         <p className="text-lg mb-4">
-          This project exemplifies my approach to technology and strategy—focusing on what's possible rather than just
-          what's feasible, and ensuring that technical decisions support broader business goals.
+          This project exemplifies my approach to technology and strategy—focusing on what&apos;s possible rather than just
+          what&apos;s feasible, and ensuring that technical decisions support broader business goals.
         </p>
         <p className="text-lg">
           Working across disciplines, I was able to bridge gaps between design, engineering, and business stakeholders
