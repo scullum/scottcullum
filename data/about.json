@@ -1,0 +1,36 @@
+{
+  "intro": {
+    "title": "How I Work",
+    "paragraphs": [
+      "I'm a <span class=\"text-accent\">creative technologist and strategist</span> with over two decades of experience spanning design, engineering, and leadership. Most recently, I've held senior positions at Red Antler and World Wide Technology.",
+      "My approach is <span class=\"text-accent\">strategic but hands-on</span>. I believe in diving deep into problems, understanding the nuances, and crafting solutions that balance technical excellence with business objectives and user needs.",
+      "I'm <span class=\"text-accent\">fluent across disciplines</span>, which allows me to bridge gaps between design, engineering, and business. This cross-functional perspective is essential for creating cohesive, effective solutions."
+    ],
+    "photo": {
+      "src": "/placeholder.svg?height=800&width=600",
+      "alt": "Scott M. Cullum",
+      "caption": "Photo: Scott M. Cullum"
+    }
+  },
+  "experience": {
+    "title": "Experience",
+    "positions": [
+      {
+        "company": "Red Antler",
+        "title": "Technology Director",
+        "description": "Led digital strategy and implementation for brand-focused startups and established companies undergoing transformation."
+      },
+      {
+        "company": "World Wide Technology",
+        "title": "Director of Digital Experience",
+        "description": "Directed cross-functional teams delivering enterprise solutions for Fortune 100 clients, balancing technical excellence with business objectives."
+      },
+      {
+        "company": "Independent Consultant",
+        "title": "Creative Technologist & Strategist",
+        "description": "Provided strategic and technical guidance to organizations ranging from early-stage startups to established enterprises."
+      }
+    ]
+  }
+}
+

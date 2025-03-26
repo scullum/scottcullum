@@ -1,0 +1,25 @@
+{
+  "services": [
+    {
+      "id": "fractional-leadership",
+      "title": "Fractional Tech Leadership",
+      "description": "Experienced technical leadership without the full-time commitment. I help organizations navigate complex technical decisions, build and mentor teams, and establish processes that scale."
+    },
+    {
+      "id": "prototyping",
+      "title": "Prototyping & Concept Development",
+      "description": "Rapidly transform ideas into tangible artifacts. I build working prototypes that help validate concepts, secure funding, and align stakeholders before significant investment."
+    },
+    {
+      "id": "ai-exploration",
+      "title": "AI Capability Exploration",
+      "description": "Cut through the AI hype cycle. I help organizations identify practical applications of AI that solve real problems, focusing on implementation rather than speculation."
+    },
+    {
+      "id": "strategic-advising",
+      "title": "Strategic Advising / Executive Collaboration",
+      "description": "Bridge the gap between business strategy and technical execution. I work directly with executives to translate vision into actionable technical roadmaps."
+    }
+  ]
+}
+

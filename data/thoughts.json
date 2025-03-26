@@ -1,0 +1,45 @@
+{
+  "posts": [
+    {
+      "id": "prototyping-clarity",
+      "title": "Prototyping Clarity",
+      "date": "2023-11-15",
+      "summary": "How rapid prototyping creates alignment and reduces risk in complex projects.",
+      "content": "In the world of product development, clarity is often the most valuable and elusive resource. Teams struggle not because they lack talent or tools, but because they lack a shared understanding of what they're building and why. This is where prototyping becomes not just a technical exercise, but a communication tool. By making ideas tangible, we create a common reference point that aligns stakeholders, surfaces hidden assumptions, and reduces the risk of building the wrong thing. The prototype becomes a conversation piece—a way to explore possibilities and constraints before committing significant resources.",
+      "image": "/placeholder.svg?height=400&width=600&text=Prototyping+Clarity"
+    },
+    {
+      "id": "ai-capability-gap",
+      "title": "The AI Capability Gap",
+      "date": "2023-09-22",
+      "summary": "Why organizations struggle to implement AI and how to bridge the gap.",
+      "content": "There's a growing gap between what AI can theoretically do and what organizations can practically implement. This capability gap isn't primarily technical—it's organizational and cultural. Companies invest in AI initiatives without first establishing the foundations: clear use cases tied to business value, data infrastructure that can support AI workflows, and teams with the right mix of skills. The result is a graveyard of proof-of-concepts that never make it to production. Bridging this gap requires a more pragmatic approach: start with well-defined problems where AI can provide clear value, build cross-functional teams that combine domain expertise with technical skills, and focus on the unglamorous work of data preparation and model operationalization.",
+      "image": "/placeholder.svg?height=400&width=600&text=AI+Capability+Gap"
+    },
+    {
+      "id": "better-questions",
+      "title": "We Need Better Questions",
+      "date": "2023-07-10",
+      "summary": "The quality of our solutions depends on the quality of our questions.",
+      "content": "In technology, we're obsessed with answers—the latest framework, the newest methodology, the most efficient algorithm. But the limiting factor in most projects isn't the quality of our answers; it's the quality of our questions. We rush to solutions before fully understanding the problem. We optimize for efficiency before confirming effectiveness. We build features without questioning assumptions about user needs. The most valuable skill in today's complex environment isn't the ability to produce answers quickly; it's the ability to ask questions that challenge assumptions, reveal hidden constraints, and reframe problems in ways that open new possibilities. The next time you're stuck, don't look for a better answer—look for a better question.",
+      "image": "/placeholder.svg?height=400&width=600&text=Better+Questions"
+    },
+    {
+      "id": "strategic-tech-debt",
+      "title": "Strategic Technical Debt",
+      "date": "2023-05-18",
+      "summary": "Not all technical debt is created equal. Some of it is worth taking on.",
+      "content": "Technical debt has a bad reputation, and for good reason. Unmanaged, it accumulates interest in the form of increased development time, bugs, and system fragility. But not all technical debt is created equal, and some of it is worth taking on strategically. The key is distinguishing between reckless debt (cutting corners due to pressure or laziness) and deliberate debt (making conscious tradeoffs to achieve specific goals). Strategic technical debt is an investment decision: you're borrowing against future development time to deliver value now, with a clear understanding of the costs and a plan for repayment. This might mean shipping a simplified version to test market fit before investing in scalability, or prioritizing user-facing features over internal tooling. The goal isn't to avoid debt entirely, but to take it on consciously, communicate it clearly, and manage it actively.",
+      "image": "/placeholder.svg?height=400&width=600&text=Strategic+Tech+Debt"
+    },
+    {
+      "id": "discipline-creates-freedom",
+      "title": "Discipline Creates Freedom",
+      "date": "2023-03-05",
+      "summary": "How structure and constraints enable creativity and innovation.",
+      "content": "There's a persistent myth in creative and technical fields that structure and discipline are the enemies of creativity—that true innovation comes from freedom and the absence of constraints. But the opposite is often true: discipline creates freedom. Clear processes free us from having to reinvent workflows for every project. Coding standards free us from debating formatting and style. Architectural boundaries free us from worrying about unintended side effects. These structures create a foundation that allows us to focus our creative energy on solving the actual problem rather than reinventing the wheel. The most innovative teams I've worked with weren't the ones with the fewest rules; they were the ones with the right rules—frameworks that provided enough structure to enable collaboration and consistency while leaving room for exploration and experimentation.",
+      "image": "/placeholder.svg?height=400&width=600&text=Discipline+Creates+Freedom"
+    }
+  ]
+}
+

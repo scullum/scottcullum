@@ -1,26 +1,194 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #ff3c00;
+  --noise-opacity: 0.05;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Add this to ensure the accent color is applied */
+.text-accent {
+  color: var(--accent) !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.bg-accent {
+  background-color: var(--accent) !important;
+}
+
+.border-accent {
+  border-color: var(--accent) !important;
+}
+
+.hover\:text-accent:hover {
+  color: var(--accent) !important;
+}
+
+.hover\:bg-accent:hover {
+  background-color: var(--accent) !important;
+}
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-mono font-bold uppercase tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  a {
+    @apply text-accent transition-all duration-200;
+  }
+
+  main {
+    @apply pt-24; /* Add padding for sticky header */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .punk-border {
+    @apply border-2 border-white relative;
+  }
+
+  .punk-border::after {
+    content: "";
+    @apply absolute inset-0 border-2 border-white -translate-x-1 -translate-y-1 pointer-events-none;
+  }
+
+  .punk-card {
+    @apply bg-black border-2 border-white p-6 relative overflow-hidden;
+  }
+
+  .punk-card::after {
+    content: "";
+    @apply absolute inset-0 border-2 border-white -translate-x-1 -translate-y-1 pointer-events-none;
+  }
+
+  /* Updated nav-link styles to remove underline and accent color on hover */
+  .nav-link {
+    @apply font-mono uppercase text-white transition-colors duration-200 relative;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-200;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .nav-link.active {
+    @apply text-white;
+  }
+
+  .nav-link.active::after {
+    @apply w-full;
+  }
+}
+
+.xerox-bg {
+  background-image: url("/textures/xerox.png");
+  background-repeat: repeat;
+  background-size: 500px;
+  mix-blend-mode: overlay;
+  opacity: 0.1;
+}
+
+.accent-text {
+  @apply text-accent;
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 red;
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: 1px 0 blue;
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% {
+    clip-path: inset(20% 0 80% 0);
+  }
+  20% {
+    clip-path: inset(60% 0 1% 0);
+  }
+  40% {
+    clip-path: inset(25% 0 58% 0);
+  }
+  60% {
+    clip-path: inset(94% 0 2% 0);
+  }
+  80% {
+    clip-path: inset(36% 0 38% 0);
+  }
+  100% {
+    clip-path: inset(58% 0 5% 0);
+  }
+}
+
+@keyframes glitch-anim-2 {
+  0% {
+    clip-path: inset(33% 0 33% 0);
+  }
+  20% {
+    clip-path: inset(12% 0 69% 0);
+  }
+  40% {
+    clip-path: inset(81% 0 7% 0);
+  }
+  60% {
+    clip-path: inset(10% 0 89% 0);
+  }
+  80% {
+    clip-path: inset(55% 0 15% 0);
+  }
+  100% {
+    clip-path: inset(75% 0 5% 0);
+  }
+}
+
+/* No underline for thought cards */
+.thought-card-link {
+  text-decoration: none !important;
+}
+.thought-card-link:hover {
+  text-decoration: none !important;
 }
