@@ -33,7 +33,7 @@ export const baseMetadata: Metadata = {
     title: 'Scott M. Cullum | Creative Technologist & Strategist',
     description: 'Scott M. Cullum is a creative technologist and strategist with 20+ years of experience in design, engineering, and leadership.',
     images: ['/og-image.jpg'], // Same as OpenGraph image
-    creator: '@scottcullum' // Replace with your Twitter handle if you have one
+    creator: '@scullum' // Twitter handle matching LinkedIn profile
   }
 }
 
