@@ -30,7 +30,7 @@ export default function Footer() {
 
         <div className="flex items-center space-x-6 mb-4 md:mb-0">
           <a
-            href="https://linkedin.com/in/scottcullum"
+            href="https://linkedin.com/in/scullum"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[var(--foreground)] hover:text-accent transition-colors duration-200 flex items-center"
