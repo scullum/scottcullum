@@ -3,6 +3,7 @@ import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/footer";
 import { baseMetadata } from "@/lib/metadata";
+import { Analytics } from "@vercel/analytics/react";
 
 // Import client components dynamically
 import dynamic from "next/dynamic";
@@ -103,6 +104,7 @@ export default function RootLayout({
             <Footer />
           </ClientWrapper>
         </SettingsProvider>
+        <Analytics />
       </body>
     </html>
   );
