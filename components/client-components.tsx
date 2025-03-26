@@ -1,7 +1,7 @@
 "use client";
 
-import dynamic from 'next/dynamic'
-import { ColorProvider } from '@/contexts/color-context'
+import dynamic from "next/dynamic";
+import { ColorProvider } from "@/contexts/color-context";
 
 // Simple wrapper component that includes all client components
 export function ClientWrapper({ children }: { children: React.ReactNode }) {
@@ -11,13 +11,15 @@ export function ClientWrapper({ children }: { children: React.ReactNode }) {
       <Navigation />
       {children}
     </ColorProvider>
-  )
+  );
 }
 
 // Static fallback components
 const NoiseOverlayFallback = () => (
-  <div className="fixed inset-0 pointer-events-none z-50 opacity-5 bg-black" />
-)
+  <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 1000 }}>
+    <div className="absolute inset-0 w-full h-full opacity-20 bg-black" />
+  </div>
+);
 
 const NavigationFallback = () => (
   <header className="py-6 md:py-8 fixed top-0 left-0 right-0 z-40">
@@ -28,15 +30,13 @@ const NavigationFallback = () => (
       </div>
     </div>
   </header>
-)
+);
 
 // Import actual components with fallbacks
-const NoiseOverlay = dynamic(
-  () => import('./noise-overlay'),
-  { loading: () => <NoiseOverlayFallback /> }
-)
+const NoiseOverlay = dynamic(() => import("./noise-overlay"), {
+  loading: () => <NoiseOverlayFallback />,
+});
 
-const Navigation = dynamic(
-  () => import('./navigation'),
-  { loading: () => <NavigationFallback /> }
-)
+const Navigation = dynamic(() => import("./navigation"), {
+  loading: () => <NavigationFallback />,
+});
