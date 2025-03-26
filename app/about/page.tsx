@@ -5,6 +5,11 @@ import { SkewedH1, SkewedH2 } from "@/components/skewed-elements";
 import dynamic from "next/dynamic";
 import { SkewedParagraphGroup } from "@/components/skewed-paragraph-group";
 
+// Import SkewedContainer for unique skew effects
+const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
+  ssr: true,
+});
+
 // Import the DistortedImage component dynamically
 const DistortedImage = dynamic(() => import("@/components/distorted-image"), {
   ssr: true,
@@ -64,20 +69,28 @@ export default function About() {
         </div>
 
         <div className="space-y-8">
-          {aboutData.experience.positions.map((position, index) => (
-            <div key={index} className="border-l-2 border-accent pl-6 py-2">
-              <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-1">
-                <h3 className="text-xl">{position.company}</h3>
+          {aboutData.experience.positions.map((position, index) => {
+            // Generate a unique skew intensity based on the position index
+            const skewIntensity = index % 3 === 0 ? "light" : index % 3 === 1 ? "medium" : "heavy";
+            
+            return (
+              <SkewedContainer 
+                key={index} 
+                intensity={skewIntensity} 
+                skewOnLoad={true}
+                className="border-l-2 border-accent pl-6 py-2"
+              >
                 {position.duration && (
-                  <span className="text-sm font-mono text-[var(--muted)]">
+                  <span className="text-sm font-mono text-[var(--muted)] block mb-1">
                     {position.duration.startDate} — {position.duration.endDate}
                   </span>
                 )}
-              </div>
-              <p className="text-accent mb-2">{position.title}</p>
-              {position.description && <p>{position.description}</p>}
-            </div>
-          ))}
+                <h3 className="text-xl mb-1">{position.company}</h3>
+                <p className="text-accent mb-2">{position.title}</p>
+                {position.description && <p>{position.description}</p>}
+              </SkewedContainer>
+            );
+          })}
         </div>
       </div>
     </div>
