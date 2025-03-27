@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
 import { middleware } from "@/middleware";
 import { features } from "@/config/features";
+import type { NextRequest } from "next/server";
 
 // Mock the features module
 jest.mock("@/config/features", () => ({
@@ -11,27 +11,41 @@ jest.mock("@/config/features", () => ({
   },
 }));
 
-// Mock NextResponse
-jest.mock("next/server", () => {
-  const originalModule = jest.requireActual("next/server");
-  return {
-    ...originalModule,
-    NextResponse: {
-      redirect: jest.fn().mockImplementation((url) => ({ redirectUrl: url })),
-      next: jest.fn().mockReturnValue({ type: "next" }),
-    },
-  };
-});
+// Mock Next.js server components
+jest.mock("next/server", () => ({
+  NextResponse: {
+    redirect: jest.fn().mockImplementation(() => ({ type: "redirect" })),
+    next: jest.fn().mockReturnValue({ type: "next" }),
+  },
+}));
+
+// Import NextResponse from the mock
+import { NextResponse } from "next/server";
 
 describe("Middleware", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
+  // Create a mock NextRequest with the minimum required properties
   function createMockRequest(url: string): NextRequest {
     return {
       nextUrl: new URL(url, "http://localhost:3000"),
       url: url,
+      // Add mock implementations for required methods
+      cookies: {
+        getAll: () => [],
+        get: () => undefined,
+        set: () => {},
+        delete: () => {},
+        has: () => false,
+      },
+      // Add other required properties with mock values
+      headers: new Headers(),
+      method: "GET",
+      ip: "",
+      geo: undefined,
+      clone: () => createMockRequest(url),
     } as unknown as NextRequest;
   }
 
