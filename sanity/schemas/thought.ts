@@ -66,12 +66,8 @@ export const thought = {
           },
         },
         {
-          type: "code",
+          type: "codeBlock",
           title: "Code Block",
-          options: {
-            language: "typescript",
-            withFilename: true,
-          },
         },
       ],
     },
