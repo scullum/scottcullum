@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import { baseMetadata } from "@/lib/metadata";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // Import client components dynamically
 import dynamic from "next/dynamic";
@@ -102,6 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </ClientWrapper>
         </SettingsProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
