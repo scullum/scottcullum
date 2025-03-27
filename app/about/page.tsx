@@ -27,7 +27,7 @@ export default function About() {
 
           <SkewedParagraphGroup className="space-y-8" intensity="medium">
             {aboutData.intro.paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-lg">
+              <p key={index} className="text-lg paragraph-container">
                 <span dangerouslySetInnerHTML={{ __html: paragraph }} />
               </p>
             ))}

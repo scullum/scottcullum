@@ -42,9 +42,21 @@ export function SkewedParagraphGroup({
 
   return (
     <div className={className}>
-      {React.Children.map(children, (child) => (
-        <div style={style}>{child}</div>
-      ))}
+      {React.Children.map(children, (child) => {
+        // Check if the child is a valid React element
+        if (React.isValidElement(child)) {
+          // Clone the element and apply the skew style to it directly
+          return React.cloneElement(child, {
+            style: {
+              ...style,
+              ...(child.props.style || {}),
+            },
+            className: `${child.props.className || ""} skewed-paragraph`,
+          });
+        }
+        // For non-element children (like text), wrap them in a div with the skew
+        return <div style={style}>{child}</div>;
+      })}
     </div>
   );
 }
