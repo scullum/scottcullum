@@ -1,43 +1,33 @@
-"use client";
-
-import RotatingText from "@/components/rotating-text";
-import oneLiners from "@/data/one-liners.json";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
-import { GlitchName } from "@/components/glitch-name";
-import { useAccentColor } from "@/contexts/color-context";
 import { features } from "@/config/features";
+import oneLiners from "@/data/one-liners.json";
+import RotatingTextWithSanity from "@/components/rotating-text-with-sanity";
 
-// Dynamically import the SkewedContainer component since it uses client-side features
+// Import client components dynamically
+const ClientHomeContent = dynamic(() => import("@/components/client-home-content"), {
+  ssr: true,
+});
+
+// Dynamically import the SkewedContainer component
 const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
   ssr: true,
 });
 
 export default function Home() {
-  const { accentColor, accentColorRgb } = useAccentColor();
   return (
     <div className="min-h-[90vh] flex flex-col justify-center pt-20">
       <div className="max-w-4xl">
-        <SkewedContainer intensity="light" skewOnLoad={true}>
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-            <span className="block" style={{ color: accentColor }}>
-              <GlitchName
-                name="Scott M. Cullum"
-                glitchIntensity="medium"
-                rotationRange={1.5}
-                glitchInterval={3000}
-                rotationInterval={7000}
-              />
-            </span>
-            <span
-              className="block text-3xl md:text-4xl mt-4 max-w-3xl"
-              style={{ color: `rgba(${accentColorRgb}, 0.6)` }}
-            >
-              <RotatingText phrases={oneLiners.phrases} className="glitch" glitchOnRotate={true} />
-            </span>
-          </h1>
-        </SkewedContainer>
+        <ClientHomeContent>
+          <div className="text-xl md:text-2xl mb-12 font-mono">
+            <RotatingTextWithSanity
+              fallbackPhrases={oneLiners.phrases}
+              interval={5000}
+              glitchOnRotate={true}
+            />
+          </div>
+        </ClientHomeContent>
 
         <SkewedContainer intensity="light" skewOnLoad={true}>
           <p className="text-xl md:text-2xl mb-12 max-w-2xl">

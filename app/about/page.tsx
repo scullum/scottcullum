@@ -1,10 +1,62 @@
 import GlitchCard from "@/components/glitch-card";
 import { FileText } from "lucide-react";
-import aboutData from "@/data/about.json";
 import { SkewedH1, SkewedH2 } from "@/components/skewed-elements";
 import dynamic from "next/dynamic";
 import { SkewedParagraphGroup } from "@/components/skewed-paragraph-group";
 import { features } from "@/config/features";
+import { getAboutContent, getSanityImageUrl } from "@/lib/sanity";
+import { notFound } from "next/navigation";
+
+// Define interfaces for About page data
+interface Duration {
+  startDate: string;
+  endDate: string;
+}
+
+interface Position {
+  company: string;
+  title: string;
+  description?: string;
+  duration?: Duration;
+}
+
+interface SanityImageReference {
+  _type: string;
+  asset: {
+    _ref: string;
+    _type: string;
+  };
+  crop?: {
+    bottom: number;
+    left: number;
+    right: number;
+    top: number;
+  };
+  hotspot?: {
+    height: number;
+    width: number;
+    x: number;
+    y: number;
+  };
+}
+
+interface Photo {
+  image: SanityImageReference;
+  caption?: string;
+}
+
+interface AboutData {
+  title: string;
+  intro: {
+    title: string;
+    paragraphs: string[];
+    photo?: Photo;
+  };
+  experience: {
+    title: string;
+    positions: Position[];
+  };
+}
 
 // Import SkewedContainer for unique skew effects
 const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
@@ -16,7 +68,14 @@ const DistortedImage = dynamic(() => import("@/components/distorted-image"), {
   ssr: true,
 });
 
-export default function About() {
+export default async function About() {
+  // Fetch about content from Sanity
+  const aboutData = await getAboutContent().catch(() => null) as AboutData | null;
+  
+  // If no data is found, show 404
+  if (!aboutData) return notFound();
+  
+  // Use local data as fallback if needed
   return (
     <div className="py-12">
       <SkewedH1 className="text-5xl md:text-6xl mb-12">About</SkewedH1>
@@ -26,7 +85,7 @@ export default function About() {
           <SkewedH2 className="text-2xl md:text-3xl mb-6 text-accent">{aboutData.intro.title}</SkewedH2>
 
           <SkewedParagraphGroup className="space-y-8" intensity="medium">
-            {aboutData.intro.paragraphs.map((paragraph, index) => (
+            {aboutData.intro.paragraphs.map((paragraph: string, index: number) => (
               <p key={index} className="text-lg paragraph-container">
                 <span dangerouslySetInnerHTML={{ __html: paragraph }} />
               </p>
@@ -38,7 +97,9 @@ export default function About() {
           <GlitchCard className="h-full">
             <div className="relative w-full h-[400px] mb-4 overflow-hidden">
               <DistortedImage
-                src="/me.webp"
+                src={aboutData.intro.photo?.image 
+                  ? getSanityImageUrl(aboutData.intro.photo.image, 800)
+                  : "/me.webp"}
                 alt="Scott M. Cullum"
                 width={600}
                 height={800}
@@ -68,7 +129,7 @@ export default function About() {
         </div>
 
         <div className="space-y-8">
-          {aboutData.experience.positions.map((position, index) => {
+          {aboutData.experience.positions.map((position: Position, index: number) => {
             // Generate a unique skew intensity based on the position index
             const skewIntensity = index % 3 === 0 ? "light" : index % 3 === 1 ? "medium" : "heavy";
 
