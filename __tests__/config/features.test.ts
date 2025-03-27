@@ -10,7 +10,7 @@ describe("Feature Flags Configuration", () => {
 
   it("should have all feature flags set to boolean values", () => {
     // Ensure all feature flags are boolean values
-    Object.entries(features).forEach(([key, value]) => {
+    Object.values(features).forEach((value) => {
       expect(typeof value).toBe("boolean");
     });
   });
