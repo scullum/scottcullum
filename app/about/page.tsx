@@ -23,7 +23,7 @@ export default function About() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
-          <SkewedH2 className="text-2xl md:text-3xl mb-6">{aboutData.intro.title}</SkewedH2>
+          <SkewedH2 className="text-2xl md:text-3xl mb-6 text-accent">{aboutData.intro.title}</SkewedH2>
 
           <SkewedParagraphGroup className="space-y-8" intensity="medium">
             {aboutData.intro.paragraphs.map((paragraph, index) => (
@@ -53,7 +53,7 @@ export default function About() {
 
       <div className="mt-24 pt-12 border-t border-[var(--border)]">
         <div className="flex justify-between items-center mb-6">
-          <SkewedH2 className="text-2xl md:text-3xl">{aboutData.experience.title}</SkewedH2>
+          <SkewedH2 className="text-2xl md:text-3xl text-accent">{aboutData.experience.title}</SkewedH2>
 
           {features.showResume && (
             <a
