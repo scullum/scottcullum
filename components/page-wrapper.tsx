@@ -5,7 +5,7 @@ import React, { ReactNode } from "react";
 
 // Dynamically import the SkewedContainer component
 const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
-  ssr: true
+  ssr: true,
 });
 
 interface PageWrapperProps {
@@ -22,7 +22,7 @@ function PageWrapper({ children, className = "" }: PageWrapperProps) {
   const applySkewToChildren = (children: ReactNode): ReactNode => {
     // If it's an array, process each child
     if (Array.isArray(children)) {
-      return children.map(child => applySkewToChildren(child));
+      return children.map((child) => applySkewToChildren(child));
     }
 
     // If it's a React element with children
@@ -32,7 +32,7 @@ function PageWrapper({ children, className = "" }: PageWrapperProps) {
       "props" in children &&
       children.props &&
       typeof children.props === "object" &&
-      'children' in children.props
+      "children" in children.props
     ) {
       // Skip elements that already have skew or shouldn't be skewed
       const shouldSkip =
@@ -40,19 +40,21 @@ function PageWrapper({ children, className = "" }: PageWrapperProps) {
         // Skip if it's not a string type (likely a custom component)
         typeof children.type !== "string" ||
         // Skip these HTML elements
-        ["a", "button", "input", "textarea", "select", "img", "svg", "path", "canvas"].includes(children.type);
+        ["a", "button", "input", "textarea", "select", "img", "svg", "path", "canvas"].includes(
+          children.type
+        );
 
       if (shouldSkip) {
         return children;
       }
 
       // Determine if this is a heading or paragraph that should be skewed
-      const isHeading = 
-        typeof children.type === "string" && 
+      const isHeading =
+        typeof children.type === "string" &&
         ["h1", "h2", "h3", "h4", "h5", "h6"].includes(children.type);
-      
-      const isParagraph = 
-        typeof children.type === "string" && 
+
+      const isParagraph =
+        typeof children.type === "string" &&
         ["p", "div", "section", "article"].includes(children.type);
 
       // Apply appropriate skew based on element type
@@ -73,22 +75,14 @@ function PageWrapper({ children, className = "" }: PageWrapperProps) {
       // Process children of this element
       const newChildren = applySkewToChildren(children.props.children);
       // Create a properly typed clone of the element with new children
-      return React.cloneElement(
-        children,
-        { ...children.props },
-        newChildren
-      );
+      return React.cloneElement(children, { ...children.props }, newChildren);
     }
 
     // Return unchanged if it's a primitive or doesn't have children
     return children;
   };
 
-  return (
-    <div className={className}>
-      {applySkewToChildren(children)}
-    </div>
-  );
+  return <div className={className}>{applySkewToChildren(children)}</div>;
 }
 
 export default PageWrapper;

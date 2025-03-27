@@ -9,20 +9,27 @@ interface ToggleControlsProps {
 }
 
 export function ToggleControls({ className = "" }: ToggleControlsProps) {
-  const { isDarkMode, isSkewEnabled, isAnimationEnabled, toggleDarkMode, toggleSkew, toggleAnimation } = useSettings();
+  const {
+    isDarkMode,
+    isSkewEnabled,
+    isAnimationEnabled,
+    toggleDarkMode,
+    toggleSkew,
+    toggleAnimation,
+  } = useSettings();
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   return (
     <div className={`fixed top-4 right-4 z-50 flex flex-col items-end gap-2 ${className}`}>
       {/* Toggle button */}
       <button
-        onClick={() => setIsExpanded(prev => !prev)}
+        onClick={() => setIsExpanded((prev) => !prev)}
         className="w-10 h-10 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center hover:bg-accent hover:text-black transition-colors duration-200"
         aria-label="Toggle settings"
       >
         <span className="text-xl font-mono">⚙️</span>
       </button>
-      
+
       {/* Controls panel */}
       {isExpanded && (
         <div className="bg-black/80 dark:bg-white/20 backdrop-blur-md p-3 rounded-md flex flex-col gap-3 text-white dark:text-white">
@@ -44,7 +51,7 @@ export function ToggleControls({ className = "" }: ToggleControlsProps) {
               </>
             )}
           </button>
-          
+
           {/* Skew toggle */}
           <button
             onClick={toggleSkew}
@@ -63,7 +70,7 @@ export function ToggleControls({ className = "" }: ToggleControlsProps) {
               </>
             )}
           </button>
-          
+
           {/* Animation toggle */}
           <button
             onClick={toggleAnimation}

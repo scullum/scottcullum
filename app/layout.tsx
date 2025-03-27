@@ -10,23 +10,20 @@ import dynamic from "next/dynamic";
 
 // Import the client wrapper components
 const ClientWrapper = dynamic(
-  () => import("@/components/client-components").then(mod => mod.ClientWrapper),
+  () => import("@/components/client-components").then((mod) => mod.ClientWrapper),
   { ssr: true }
 );
 
 // Import the SkewProvider for site-wide glitch aesthetics
-const SkewProvider = dynamic(
-  () => import("@/app/skew-provider").then(mod => mod.SkewProvider),
-  { ssr: true }
-);
+const SkewProvider = dynamic(() => import("@/app/skew-provider").then((mod) => mod.SkewProvider), {
+  ssr: true,
+});
 
 // Import the SettingsProvider for user preferences
 const SettingsProvider = dynamic(
-  () => import("@/contexts/settings-context").then(mod => mod.SettingsProvider),
+  () => import("@/contexts/settings-context").then((mod) => mod.SettingsProvider),
   { ssr: true }
 );
-
-
 
 // SVG Filters for glitch effects
 const GlitchFilters = () => (
@@ -61,7 +58,13 @@ const GlitchFilters = () => (
       </filter>
       <filter id="glitchFilter">
         <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="noise"
+          scale="5"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
       </filter>
     </defs>
   </svg>
@@ -80,11 +83,7 @@ const spaceMono = Space_Mono({
 
 export const metadata = baseMetadata;
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body
@@ -96,9 +95,7 @@ export default function RootLayout({
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
               <main>
-                <SkewProvider>
-                  {children}
-                </SkewProvider>
+                <SkewProvider>{children}</SkewProvider>
               </main>
             </div>
             <Footer />

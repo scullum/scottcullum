@@ -16,7 +16,10 @@ export function ClientWrapper({ children }: { children: React.ReactNode }) {
 
 // Static fallback components
 const NoiseOverlayFallback = () => (
-  <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none" style={{ zIndex: 1000 }}>
+  <div
+    className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none"
+    style={{ zIndex: 1000 }}
+  >
     <div className="absolute inset-0 w-full h-full opacity-20 bg-black" />
   </div>
 );

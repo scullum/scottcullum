@@ -9,10 +9,10 @@ interface InlineToggleControlsProps {
 
 export function InlineToggleControls({ className = "" }: InlineToggleControlsProps) {
   const { isSkewEnabled, isAnimationEnabled, toggleEffects } = useSettings();
-  
+
   // Determine the combined state
   const effectsEnabled = isSkewEnabled && isAnimationEnabled;
-  
+
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       {/* Combined effects toggle with lightning bolt icon */}

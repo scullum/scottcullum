@@ -7,7 +7,7 @@
   --accent: #ff3c00;
   --accent-rgb: 255, 60, 0;
   --noise-opacity: 0.05;
-  
+
   /* Dark mode variables (default) */
   --background: #000000;
   --foreground: #ffffff;
@@ -56,17 +56,19 @@
     @apply antialiased;
     background-color: var(--background);
     color: var(--foreground);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
-  
+
   /* Navigation link styling */
   .nav-link {
     position: relative;
     padding-bottom: 2px;
   }
-  
+
   .nav-link::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: 0;
@@ -75,11 +77,11 @@
     background-color: transparent;
     transition: background-color 0.2s ease;
   }
-  
+
   .nav-link:hover::after {
     background-color: var(--accent);
   }
-  
+
   .nav-link.active::after {
     background-color: var(--accent);
   }

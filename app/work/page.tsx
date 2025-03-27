@@ -1,17 +1,28 @@
-import GlitchCard from "@/components/glitch-card"
-import workData from "@/data/work.json"
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import GlitchCard from "@/components/glitch-card";
+import workData from "@/data/work.json";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { SkewedH1 } from "@/components/skewed-elements";
 
 export default function Work() {
   return (
     <div className="py-12">
-      <h1 className="text-5xl md:text-6xl mb-12">Work</h1>
+      <SkewedH1 className="text-5xl md:text-6xl mb-12">Work</SkewedH1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {workData.projects.map((project, index) => (
-          <GlitchCard key={project.id} className={`${index % 2 === 0 ? "md:translate-y-8" : ""}`} glitchEffect={true}>
+          <GlitchCard
+            key={project.id}
+            className={`${index % 2 === 0 ? "md:translate-y-8" : ""} transform ${
+              index % 3 === 0
+                ? "skew-x-1 skew-y-0.5"
+                : index % 3 === 1
+                  ? "skew-x-2 -skew-y-1"
+                  : "-skew-x-1.5 skew-y-1.5"
+            }`}
+            glitchEffect={true}
+          >
             <div className="relative w-full h-48 mb-4 overflow-hidden">
               <Image
                 src={project.image || "/placeholder.svg"}
@@ -47,6 +58,5 @@ export default function Work() {
         </Link>
       </div>
     </div>
-  )
+  );
 }
-

@@ -30,28 +30,31 @@ function DistortedImage({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isDistorting, setIsDistorting] = useState(!distortOnHover);
-  
+
   // Define intensity settings with useMemo to prevent re-renders
-  const intensitySettings = useMemo(() => ({
-    light: { rgbShift: 3, glitchProbability: 0.1 },
-    medium: { rgbShift: 5, glitchProbability: 0.2 },
-    heavy: { rgbShift: 8, glitchProbability: 0.3 },
-  }), []);
-  
+  const intensitySettings = useMemo(
+    () => ({
+      light: { rgbShift: 3, glitchProbability: 0.1 },
+      medium: { rgbShift: 5, glitchProbability: 0.2 },
+      heavy: { rgbShift: 8, glitchProbability: 0.3 },
+    }),
+    []
+  );
+
   // Apply distortion effect
   const applyDistortion = useCallback(() => {
     if (!isDistorting || !containerRef.current) return;
-    
+
     const settings = intensitySettings[distortionIntensity];
     const container = containerRef.current;
-    
+
     // Get all image layers
     const redLayer = container.querySelector(".red-layer") as HTMLElement;
     const greenLayer = container.querySelector(".green-layer") as HTMLElement;
     const blueLayer = container.querySelector(".blue-layer") as HTMLElement;
-    
+
     if (!redLayer || !greenLayer || !blueLayer) return;
-    
+
     // Random RGB shift
     if (Math.random() < settings.glitchProbability) {
       const redX = (Math.random() * 2 - 1) * settings.rgbShift;
@@ -60,7 +63,7 @@ function DistortedImage({
       const greenY = (Math.random() * 2 - 1) * settings.rgbShift;
       const blueX = (Math.random() * 2 - 1) * settings.rgbShift;
       const blueY = (Math.random() * 2 - 1) * settings.rgbShift;
-      
+
       redLayer.style.transform = `translate(${redX}px, ${redY}px)`;
       greenLayer.style.transform = `translate(${greenX}px, ${greenY}px)`;
       blueLayer.style.transform = `translate(${blueX}px, ${blueY}px)`;
@@ -70,59 +73,60 @@ function DistortedImage({
       greenLayer.style.transform = "translate(0, 0)";
       blueLayer.style.transform = "translate(0, 0)";
     }
-    
+
     // Schedule next distortion
-    const timeout = setTimeout(() => {
-      applyDistortion();
-    }, Math.random() * 1000 + 200);
-    
+    const timeout = setTimeout(
+      () => {
+        applyDistortion();
+      },
+      Math.random() * 1000 + 200
+    );
+
     return () => clearTimeout(timeout);
   }, [isDistorting, distortionIntensity, intensitySettings]);
-  
+
   // Start distortion effect
   useEffect(() => {
     if (isDistorting && !isLoading) {
       applyDistortion();
     }
-    
+
     return () => {
       // Cleanup
     };
   }, [isDistorting, isLoading, applyDistortion]);
-  
+
   // Handle hover events
   const handleMouseEnter = () => {
     if (distortOnHover) {
       setIsDistorting(true);
     }
   };
-  
+
   const handleMouseLeave = () => {
     if (distortOnHover) {
       setIsDistorting(false);
-      
+
       // Reset all layers
       if (containerRef.current) {
         const container = containerRef.current;
         const layers = container.querySelectorAll(".color-layer") as NodeListOf<HTMLElement>;
-        layers.forEach(layer => {
+        layers.forEach((layer) => {
           layer.style.transform = "translate(0, 0)";
         });
       }
     }
   };
-  
+
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`relative overflow-hidden ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {isLoading && (
-        <div className="absolute inset-0 bg-gray-900 animate-pulse" />
-      )}
-      
+      {isLoading && <div className="absolute inset-0 bg-gray-900 animate-pulse" />}
+
       {/* Red layer */}
       <div className="absolute inset-0 color-layer red-layer mix-blend-screen">
         <Image
@@ -137,7 +141,7 @@ function DistortedImage({
           onLoadingComplete={() => setIsLoading(false)}
         />
       </div>
-      
+
       {/* Green layer */}
       <div className="absolute inset-0 color-layer green-layer mix-blend-screen">
         <Image
@@ -151,7 +155,7 @@ function DistortedImage({
           aria-hidden="true"
         />
       </div>
-      
+
       {/* Blue layer */}
       <div className="absolute inset-0 color-layer blue-layer mix-blend-screen">
         <Image
@@ -165,7 +169,7 @@ function DistortedImage({
           aria-hidden="true"
         />
       </div>
-      
+
       {/* Base image (for SEO and accessibility) */}
       <Image
         src={src}
@@ -173,9 +177,9 @@ function DistortedImage({
         width={width}
         height={height}
         priority={priority}
-        className={`w-full h-full object-cover ${isLoading ? 'opacity-0' : 'opacity-0'}`}
+        className={`w-full h-full object-cover ${isLoading ? "opacity-0" : "opacity-0"}`}
       />
-      
+
       {/* SVG filters */}
       <svg className="absolute -z-10 opacity-0 pointer-events-none" aria-hidden="true">
         <defs>
