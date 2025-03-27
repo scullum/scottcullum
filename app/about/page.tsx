@@ -4,6 +4,7 @@ import aboutData from "@/data/about.json";
 import { SkewedH1, SkewedH2 } from "@/components/skewed-elements";
 import dynamic from "next/dynamic";
 import { SkewedParagraphGroup } from "@/components/skewed-paragraph-group";
+import { features } from "@/config/features";
 
 // Import SkewedContainer for unique skew effects
 const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
@@ -50,18 +51,20 @@ export default function About() {
         </div>
       </div>
 
-      <div className="mt-16">
+      <div className="mt-24 pt-12 border-t border-[var(--border)]">
         <div className="flex justify-between items-center mb-6">
           <SkewedH2 className="text-2xl md:text-3xl">{aboutData.experience.title}</SkewedH2>
 
-          <a
-            href="/scott-cullum-resume.pdf"
-            download
-            className="punk-border inline-flex items-center px-4 py-2 text-sm font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
-          >
-            <FileText size={16} className="mr-2" />
-            Download Resume
-          </a>
+          {features.showResume && (
+            <a
+              href="/scott-cullum-resume.pdf"
+              download
+              className="punk-border inline-flex items-center px-4 py-2 text-sm font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
+            >
+              <FileText size={16} className="mr-2" />
+              Download Resume
+            </a>
+          )}
         </div>
 
         <div className="space-y-8">
