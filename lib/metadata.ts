@@ -30,14 +30,7 @@ export const baseMetadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Scott M. Cullum | Creative Technologist & Strategist",
-    description:
-      "Scott M. Cullum is a creative technologist and strategist with 20+ years of experience in design, engineering, and leadership.",
-    images: ["/og-image.jpg"], // Same as OpenGraph image
-    creator: "@scottcullum", // Replace with your Twitter handle if you have one
-  },
+  // No Twitter metadata as requested
 };
 
 // Helper to generate metadata for specific pages
