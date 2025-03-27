@@ -20,7 +20,7 @@ const NoiseOverlayFallback = () => (
     className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none"
     style={{ zIndex: 1000 }}
   >
-    <div className="absolute inset-0 w-full h-full opacity-20 bg-black" />
+    <div className="absolute inset-0 w-full h-full opacity-40 bg-black" />
   </div>
 );
 
