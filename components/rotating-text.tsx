@@ -17,9 +17,12 @@ const RotatingText = ({
   glitchOnRotate = false,
 }: RotatingTextProps) => {
   const { isAnimationEnabled } = useSettings();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Generate a random starting index
+  const randomStartIndex = useMemo(() => Math.floor(Math.random() * phrases.length), [phrases]);
+  
+  const [currentIndex, setCurrentIndex] = useState(randomStartIndex);
   const [isVisible, setIsVisible] = useState(true);
-  const [displayText, setDisplayText] = useState(phrases[0]);
+  const [displayText, setDisplayText] = useState(phrases[randomStartIndex]);
 
   // Memoize the phrases array length calculation
   const phrasesLength = useMemo(() => phrases.length, [phrases]);
@@ -111,14 +114,14 @@ const RotatingText = ({
     };
   }, [interval, transitionToNextPhrase, isAnimationEnabled, phrases]);
 
-  // Reset to first phrase when animations are toggled off
+  // Reset to random phrase when animations are toggled off
   useEffect(() => {
     if (!isAnimationEnabled) {
-      setCurrentIndex(0);
-      setDisplayText(phrases[0]);
+      setCurrentIndex(randomStartIndex);
+      setDisplayText(phrases[randomStartIndex]);
       setIsVisible(true);
     }
-  }, [isAnimationEnabled, phrases]);
+  }, [isAnimationEnabled, phrases, randomStartIndex]);
 
   // Memoize the current phrase
   const currentPhrase = useMemo(() => phrases[currentIndex], [phrases, currentIndex]);
@@ -147,7 +150,7 @@ const RotatingText = ({
           transition: isAnimationEnabled ? undefined : "none",
         }}
       >
-        {isAnimationEnabled ? (glitchOnRotate ? displayText : currentPhrase) : phrases[0]}
+        {isAnimationEnabled ? (glitchOnRotate ? displayText : currentPhrase) : phrases[randomStartIndex]}
       </div>
     </div>
   );
