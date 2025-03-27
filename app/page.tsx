@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import { GlitchName } from "@/components/glitch-name";
 import { useAccentColor } from "@/contexts/color-context";
+import { features } from "@/config/features";
 
 // Dynamically import the SkewedContainer component since it uses client-side features
 const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
@@ -46,24 +47,40 @@ export default function Home() {
         </SkewedContainer>
 
         <div className="flex flex-col sm:flex-row gap-6">
-          <SkewedContainer intensity="medium" skewOnLoad={true}>
-            <Link
-              href="/work"
-              className="punk-border inline-flex items-center justify-center px-8 py-3 text-lg font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
-            >
-              See my work
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </SkewedContainer>
+          {features.showWork && (
+            <SkewedContainer intensity="medium" skewOnLoad={true}>
+              <Link
+                href="/work"
+                className="punk-border inline-flex items-center justify-center px-8 py-3 text-lg font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
+              >
+                See my work
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </SkewedContainer>
+          )}
 
-          <SkewedContainer intensity="medium" skewOnLoad={true}>
-            <Link
-              href="/thoughts"
-              className="punk-border inline-flex items-center justify-center px-8 py-3 text-lg font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
-            >
-              Read my thoughts
-            </Link>
-          </SkewedContainer>
+          {features.showThoughts && (
+            <SkewedContainer intensity="medium" skewOnLoad={true}>
+              <Link
+                href="/thoughts"
+                className="punk-border inline-flex items-center justify-center px-8 py-3 text-lg font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
+              >
+                Read my thoughts
+              </Link>
+            </SkewedContainer>
+          )}
+
+          {!features.showWork && !features.showThoughts && (
+            <SkewedContainer intensity="medium" skewOnLoad={true}>
+              <Link
+                href="mailto:scott@scullum.com"
+                className="punk-border inline-flex items-center justify-center px-8 py-3 text-lg font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
+              >
+                Get in touch
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </SkewedContainer>
+          )}
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, Mail } from "lucide-react";
 import { InlineToggleControls } from "./inline-toggle-controls";
+import { features } from "@/config/features";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -41,8 +42,9 @@ const Navigation = () => {
   const links = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/work", label: "Work" },
-    { href: "/thoughts", label: "Thoughts" },
+    // Only show work and thoughts links if enabled in features
+    ...(features.showWork ? [{ href: "/work", label: "Work" }] : []),
+    ...(features.showThoughts ? [{ href: "/thoughts", label: "Thoughts" }] : []),
     { href: "mailto:scott@scullum.com", label: "Contact", isExternal: true },
   ];
 

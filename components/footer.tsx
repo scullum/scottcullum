@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Linkedin, FileText } from "lucide-react";
 import { InlineToggleControls } from "./inline-toggle-controls";
 import { usePathname } from "next/navigation";
+import { features } from "@/config/features";
 
 export default function Footer() {
   const { accentColorName, setColor } = useAccentColor();
@@ -32,7 +33,7 @@ export default function Footer() {
 
           <div className="flex items-center space-x-6 mb-4 md:mb-0">
             <a
-              href="https://linkedin.com/in/scottcullum"
+              href="https://linkedin.com/in/scullum"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[var(--foreground)] hover:text-accent transition-colors duration-200 flex items-center"
@@ -42,15 +43,17 @@ export default function Footer() {
               <span className="ml-2 text-sm font-mono hidden sm:inline">LinkedIn</span>
             </a>
 
-            <a
-              href="/scott-cullum-resume.pdf"
-              download
-              className="text-[var(--foreground)] hover:text-accent transition-colors duration-200 flex items-center"
-              aria-label="Download Resume"
-            >
-              <FileText size={20} />
-              <span className="ml-2 text-sm font-mono hidden sm:inline">Resume</span>
-            </a>
+            {features.showResume && (
+              <a
+                href="/scott-cullum-resume.pdf"
+                download
+                className="text-[var(--foreground)] hover:text-accent transition-colors duration-200 flex items-center"
+                aria-label="Download Resume"
+              >
+                <FileText size={20} />
+                <span className="ml-2 text-sm font-mono hidden sm:inline">Resume</span>
+              </a>
+            )}
           </div>
 
           <div className="relative">
