@@ -1,19 +1,39 @@
 import GlitchCard from "@/components/glitch-card";
-import workData from "@/data/work.json";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { SkewedH1 } from "@/components/skewed-elements";
+import { getWorks, getSanityImageUrl } from "@/lib/sanity";
+import { features } from "@/config/features";
+import { notFound } from "next/navigation";
 
-export default function Work() {
+// Define interfaces for Work data
+interface WorkProject {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  mainImage: unknown; // Sanity image reference
+  categories: string[];
+  technologies: string[];
+  projectUrl?: string;
+  githubUrl?: string;
+}
+
+export default async function Work() {
+  // Check if work section is enabled
+  if (!features.showWork) return notFound();
+
+  // Fetch work projects from Sanity
+  const workProjects = (await getWorks().catch(() => [])) as WorkProject[];
   return (
     <div className="py-12">
       <SkewedH1 className="text-5xl md:text-6xl mb-12">Work</SkewedH1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {workData.projects.map((project, index) => (
+        {workProjects.map((project, index) => (
           <GlitchCard
-            key={project.id}
+            key={project._id}
             className={`${index % 2 === 0 ? "md:translate-y-8" : ""} transform ${
               index % 3 === 0
                 ? "skew-x-1 skew-y-0.5"
@@ -25,7 +45,9 @@ export default function Work() {
           >
             <div className="relative w-full h-48 mb-4 overflow-hidden">
               <Image
-                src={project.image || "/placeholder.svg"}
+                src={
+                  project.mainImage ? getSanityImageUrl(project.mainImage, 800) : "/placeholder.svg"
+                }
                 alt={project.title}
                 fill
                 className="object-cover transition-transform duration-500 hover:scale-105"
@@ -33,11 +55,13 @@ export default function Work() {
             </div>
 
             <h2 className="text-2xl mb-2">{project.title}</h2>
-            <p className="text-accent font-mono mb-4">{project.subtitle}</p>
-            <p className="mb-6">{project.summary}</p>
+            <p className="text-accent font-mono mb-4">
+              {project.categories?.join(", ") || "Project"}
+            </p>
+            <p className="mb-6">{project.excerpt}</p>
 
             <Link
-              href={`/work/${project.id}`}
+              href={`/work/${project.slug.current}`}
               className="inline-flex items-center font-mono text-accent hover:underline"
             >
               View details

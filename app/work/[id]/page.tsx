@@ -1,23 +1,63 @@
-import workData from "@/data/work.json";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import GlitchCard from "@/components/glitch-card";
+import { getWorkBySlug, getSanityImageUrl } from "@/lib/sanity";
+import { features } from "@/config/features";
+import { PortableText } from "@portabletext/react";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+// Define interfaces for Work data
+interface SanityImageReference {
+  _type: string;
+  asset: {
+    _ref: string;
+    _type: string;
+  };
+  crop?: {
+    bottom: number;
+    left: number;
+    right: number;
+    top: number;
+  };
+  hotspot?: {
+    height: number;
+    width: number;
+    x: number;
+    y: number;
+  };
+}
+
+interface WorkProject {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  mainImage: SanityImageReference;
+  categories: string[];
+  publishedAt: string;
+  body: any[];
+  technologies: string[];
+  projectUrl?: string;
+  githubUrl?: string;
+}
 
 // Define the params type for this specific page
 type WorkDetailPageParams = {
   id: string;
 };
 
-export function generateStaticParams() {
-  return workData.projects.map((project) => ({
-    id: project.id,
-  }));
-}
+// We'll use dynamic rendering for now
+// In production, you'd want to implement generateStaticParams
+// that fetches all work slugs from Sanity
 
-export default function WorkDetailPage({ params }: { params: WorkDetailPageParams }) {
-  const project = workData.projects.find((p) => p.id === params.id);
+export default async function WorkDetailPage({ params }: { params: WorkDetailPageParams }) {
+  // Check if work section is enabled
+  if (!features.showWork) return notFound();
+  
+  // Fetch work project from Sanity
+  const project = await getWorkBySlug(params.id).catch(() => null) as WorkProject | null;
 
   if (!project) {
     notFound();
@@ -34,11 +74,19 @@ export default function WorkDetailPage({ params }: { params: WorkDetailPageParam
       </Link>
 
       <div className="relative w-full h-[400px] mb-8 overflow-hidden punk-border">
-        <Image src="/me.webp" alt={project.title} fill className="object-cover" priority />
+        <Image 
+          src={project.mainImage 
+            ? getSanityImageUrl(project.mainImage, 1200)
+            : "/placeholder.svg"} 
+          alt={project.title} 
+          fill 
+          className="object-cover" 
+          priority 
+        />
       </div>
 
       <h1 className="text-5xl md:text-6xl mb-4">{project.title}</h1>
-      <p className="text-xl text-accent font-mono mb-12">{project.subtitle}</p>
+      <p className="text-xl text-accent font-mono mb-12">{project.categories?.join(", ") || "Project"}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
         <GlitchCard>
@@ -71,46 +119,28 @@ export default function WorkDetailPage({ params }: { params: WorkDetailPageParam
 
       <div className="mb-12">
         <h2 className="text-3xl mb-6">Project Overview</h2>
-        <p className="text-lg mb-4">{project.summary}</p>
-        <p className="text-lg mb-4">
-          This project exemplifies my approach to technology and strategy—focusing on what&apos;s
-          possible rather than just what&apos;s feasible, and ensuring that technical decisions
-          support broader business goals.
-        </p>
-        <p className="text-lg">
-          Working across disciplines, I was able to bridge gaps between design, engineering, and
-          business stakeholders to create a cohesive solution that addressed complex challenges
-          while maintaining clarity of purpose.
-        </p>
+        <p className="text-lg mb-4">{project.excerpt}</p>
+        {project.body && (
+          <div className="text-lg prose prose-invert max-w-none">
+            <PortableText value={project.body} />
+          </div>
+        )}
       </div>
 
-      <div className="mb-12">
-        <h2 className="text-3xl mb-6">Key Contributions</h2>
+      {project.technologies && project.technologies.length > 0 && (
+        <div className="mb-12">
+          <h2 className="text-3xl mb-6">Technologies</h2>
 
-        <ul className="space-y-4">
-          <li className="flex items-start">
-            <span className="text-accent mr-2">→</span>
-            <span>
-              Strategic direction and technical leadership throughout the project lifecycle
-            </span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-accent mr-2">→</span>
-            <span>
-              Cross-functional collaboration to align technical implementation with business
-              objectives
-            </span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-accent mr-2">→</span>
-            <span>Rapid prototyping to validate concepts and create stakeholder alignment</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-accent mr-2">→</span>
-            <span>Implementation oversight to ensure technical excellence and maintainability</span>
-          </li>
-        </ul>
-      </div>
+          <ul className="space-y-4">
+            {project.technologies.map((tech, index) => (
+              <li key={index} className="flex items-start">
+                <span className="text-accent mr-2">→</span>
+                <span>{tech}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className="text-center mt-16">
         <p className="text-xl mb-8">Interested in working together on a similar project?</p>
