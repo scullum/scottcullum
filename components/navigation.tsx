@@ -43,7 +43,7 @@ const Navigation = () => {
     { href: "/about", label: "About" },
     { href: "/work", label: "Work" },
     { href: "/thoughts", label: "Thoughts" },
-    { href: "mailto:scott@scullum.com", label: "Email", isExternal: true },
+    { href: "mailto:scott@scullum.com", label: "Contact", isExternal: true },
   ]
 
   return (
