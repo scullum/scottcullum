@@ -10,6 +10,15 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
+  "prettier": {
+    "semi": true,
+    "singleQuote": false,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "printWidth": 100,
+    "bracketSpacing": true,
+    "arrowParens": "always"
+  },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
