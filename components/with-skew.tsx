@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 
 // Dynamically import the SkewedContainer
 const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
-  ssr: true
+  ssr: true,
 });
 
 /**
@@ -20,11 +20,7 @@ export function withSkew<P extends object>(
     applyToAll?: boolean;
   } = {}
 ) {
-  const {
-    intensity = "medium",
-    selector = "",
-    applyToAll = false
-  } = options;
+  const { intensity = "medium", selector = "", applyToAll = false } = options;
 
   // Return a new component that wraps the original with skew effects
   const WithSkew = (props: P & { className?: string; children?: ReactNode }) => {
@@ -41,11 +37,12 @@ export function withSkew<P extends object>(
       }
 
       // Default: skew headings and paragraphs
-      const isHeading = Component.displayName?.startsWith("h") || 
-                        ["h1", "h2", "h3", "h4", "h5", "h6"].includes(Component.displayName || "");
-      
+      const isHeading =
+        Component.displayName?.startsWith("h") ||
+        ["h1", "h2", "h3", "h4", "h5", "h6"].includes(Component.displayName || "");
+
       const isParagraph = Component.displayName === "p";
-      
+
       return isHeading || isParagraph;
     };
 
@@ -53,7 +50,7 @@ export function withSkew<P extends object>(
     if (shouldSkew()) {
       return (
         <SkewedContainer intensity={intensity} skewOnLoad={true}>
-          <Component className={className} {...rest as P}>
+          <Component className={className} {...(rest as P)}>
             {children}
           </Component>
         </SkewedContainer>
@@ -61,7 +58,11 @@ export function withSkew<P extends object>(
     }
 
     // Otherwise, render the original component
-    return <Component className={className} {...rest as P}>{children}</Component>;
+    return (
+      <Component className={className} {...(rest as P)}>
+        {children}
+      </Component>
+    );
   };
 
   // Set display name for debugging
@@ -71,35 +72,63 @@ export function withSkew<P extends object>(
 }
 
 // Create skewed versions of common HTML elements
-export const SkewedH1 = withSkew(({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
-  <h1 className={className} {...props}>{children}</h1>
-), { intensity: "medium" });
+export const SkewedH1 = withSkew(
+  ({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
+    <h1 className={className} {...props}>
+      {children}
+    </h1>
+  ),
+  { intensity: "medium" }
+);
 SkewedH1.displayName = "h1";
 
-export const SkewedH2 = withSkew(({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
-  <h2 className={className} {...props}>{children}</h2>
-), { intensity: "medium" });
+export const SkewedH2 = withSkew(
+  ({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
+    <h2 className={className} {...props}>
+      {children}
+    </h2>
+  ),
+  { intensity: "medium" }
+);
 SkewedH2.displayName = "h2";
 
-export const SkewedH3 = withSkew(({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
-  <h3 className={className} {...props}>{children}</h3>
-), { intensity: "light" });
+export const SkewedH3 = withSkew(
+  ({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
+    <h3 className={className} {...props}>
+      {children}
+    </h3>
+  ),
+  { intensity: "light" }
+);
 SkewedH3.displayName = "h3";
 
-export const SkewedP = withSkew(({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
-  <p className={className} {...props}>{children}</p>
-), { intensity: "light" });
+export const SkewedP = withSkew(
+  ({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
+    <p className={className} {...props}>
+      {children}
+    </p>
+  ),
+  { intensity: "light" }
+);
 SkewedP.displayName = "p";
 
-export const SkewedDiv = withSkew(({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
-  <div className={className} {...props}>{children}</div>
-), { intensity: "light", selector: "skew" });
+export const SkewedDiv = withSkew(
+  ({ className = "", children, ...props }: { className?: string; children?: ReactNode }) => (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  ),
+  { intensity: "light", selector: "skew" }
+);
 SkewedDiv.displayName = "div";
 
 // Export a function to apply skew to any component
-export function applySkew(component: ReactNode, intensity: "light" | "medium" | "heavy" = "medium"): ReactNode {
+export function applySkew(
+  component: ReactNode,
+  intensity: "light" | "medium" | "heavy" = "medium"
+): ReactNode {
   if (!component) return null;
-  
+
   return (
     <SkewedContainer intensity={intensity} skewOnLoad={true}>
       {component}

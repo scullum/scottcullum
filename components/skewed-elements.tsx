@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 
 // Dynamically import the SkewedContainer component
 const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
-  ssr: true
+  ssr: true,
 });
 
 // Common props interface for all skewed elements
@@ -61,7 +61,11 @@ export function SkewedDiv({ children, className = "", intensity = "light" }: Ske
   );
 }
 
-export function SkewedSection({ children, className = "", intensity = "light" }: SkewedElementProps) {
+export function SkewedSection({
+  children,
+  className = "",
+  intensity = "light",
+}: SkewedElementProps) {
   return (
     <SkewedContainer intensity={intensity} skewOnLoad={true}>
       <section className={className}>{children}</section>

@@ -15,7 +15,7 @@ interface SkewedParagraphGroupProps {
 export function SkewedParagraphGroup({
   children,
   className = "",
-  intensity = "light"
+  intensity = "light",
 }: SkewedParagraphGroupProps) {
   // Generate a single random skew value for all children
   const skewValues = useMemo(() => {
@@ -25,27 +25,25 @@ export function SkewedParagraphGroup({
       medium: { x: 3, y: 3 },
       heavy: { x: 6, y: 6 },
     };
-    
+
     const range = ranges[intensity];
     const skewX = (Math.random() * 2 - 1) * range.x;
     const skewY = (Math.random() * 2 - 1) * range.y;
-    
+
     return { skewX, skewY };
   }, [intensity]);
-  
+
   // Apply the same skew to all children
   const style = {
     transform: `skew(${skewValues.skewX}deg, ${skewValues.skewY}deg)`,
     transition: "transform 0.2s ease-out",
-    display: "block"
+    display: "block",
   };
-  
+
   return (
     <div className={className}>
-      {React.Children.map(children, child => (
-        <div style={style}>
-          {child}
-        </div>
+      {React.Children.map(children, (child) => (
+        <div style={style}>{child}</div>
       ))}
     </div>
   );

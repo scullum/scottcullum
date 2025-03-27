@@ -22,9 +22,7 @@ export default function About() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
-          <SkewedH2 className="text-2xl md:text-3xl mb-6">
-            {aboutData.intro.title}
-          </SkewedH2>
+          <SkewedH2 className="text-2xl md:text-3xl mb-6">{aboutData.intro.title}</SkewedH2>
 
           <SkewedParagraphGroup className="space-y-8" intensity="medium">
             {aboutData.intro.paragraphs.map((paragraph, index) => (
@@ -54,9 +52,7 @@ export default function About() {
 
       <div className="mt-16">
         <div className="flex justify-between items-center mb-6">
-          <SkewedH2 className="text-2xl md:text-3xl">
-            {aboutData.experience.title}
-          </SkewedH2>
+          <SkewedH2 className="text-2xl md:text-3xl">{aboutData.experience.title}</SkewedH2>
 
           <a
             href="/scott-cullum-resume.pdf"
@@ -72,11 +68,11 @@ export default function About() {
           {aboutData.experience.positions.map((position, index) => {
             // Generate a unique skew intensity based on the position index
             const skewIntensity = index % 3 === 0 ? "light" : index % 3 === 1 ? "medium" : "heavy";
-            
+
             return (
-              <SkewedContainer 
-                key={index} 
-                intensity={skewIntensity} 
+              <SkewedContainer
+                key={index}
+                intensity={skewIntensity}
                 skewOnLoad={true}
                 className="border-l-2 border-accent pl-6 py-2"
               >

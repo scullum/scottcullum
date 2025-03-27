@@ -12,9 +12,15 @@ export default function Work() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {workData.projects.map((project, index) => (
-          <GlitchCard 
-            key={project.id} 
-            className={`${index % 2 === 0 ? "md:translate-y-8" : ""} transform ${index % 3 === 0 ? "skew-x-1 skew-y-0.5" : index % 3 === 1 ? "skew-x-2 -skew-y-1" : "-skew-x-1.5 skew-y-1.5"}`} 
+          <GlitchCard
+            key={project.id}
+            className={`${index % 2 === 0 ? "md:translate-y-8" : ""} transform ${
+              index % 3 === 0
+                ? "skew-x-1 skew-y-0.5"
+                : index % 3 === 1
+                  ? "skew-x-2 -skew-y-1"
+                  : "-skew-x-1.5 skew-y-1.5"
+            }`}
             glitchEffect={true}
           >
             <div className="relative w-full h-48 mb-4 overflow-hidden">
@@ -54,4 +60,3 @@ export default function Work() {
     </div>
   );
 }
-

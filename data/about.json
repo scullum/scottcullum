@@ -2,9 +2,14 @@
   "intro": {
     "title": "How I Work",
     "paragraphs": [
-      "I'm a <span class=\"text-accent\">creative technologist and strategist</span> with over two decades of experience spanning design, engineering, and leadership. Most recently, I've held senior positions at Red Antler and World Wide Technology.",
-      "My approach is <span class=\"text-accent\">strategic but hands-on</span>. I believe in diving deep into problems, understanding the nuances, and crafting solutions that balance technical excellence with business objectives and user needs.",
-      "I'm <span class=\"text-accent\">fluent across disciplines</span>, which allows me to bridge gaps between design, engineering, and business. This cross-functional perspective is essential for creating cohesive, effective solutions."
+      "I build models, not just products—introducing new delivery frameworks and prototyping methods that change how teams work. My goal isn’t just speed, but smarter collaboration and clearer outcomes.",
+
+      "My background spans front-end architecture, AI strategy, digital product innovation, and creative development. I’ve led award-winning projects across retail, media, and tech—from Verizon’s Express retail pilot to WWF’s Apple Design Award-winning app.",
+
+      "My philosophy stays consistent:",
+      "**We elevate the discourse around technology and illustrate moments of possibility to differentiate our work.**",
+
+      "I bring clarity, momentum, and a track record of making complex things work—without losing sight of the people they’re built for."
     ]
   },
   "experience": {
@@ -81,4 +86,3 @@
     ]
   }
 }
-

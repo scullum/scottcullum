@@ -29,7 +29,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useState(defaultSettings.isDarkMode);
   const [isSkewEnabled, setIsSkewEnabled] = useState(defaultSettings.isSkewEnabled);
   const [isAnimationEnabled, setIsAnimationEnabled] = useState(defaultSettings.isAnimationEnabled);
-  
+
   // Apply light mode class immediately if in client
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -45,14 +45,16 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   // Load settings from localStorage on mount
   useEffect(() => {
     if (typeof window === "undefined") return;
-    
+
     try {
       const savedSettings = localStorage.getItem("site-settings");
       if (savedSettings) {
         const parsedSettings = JSON.parse(savedSettings);
         setIsDarkMode(parsedSettings.isDarkMode ?? defaultSettings.isDarkMode);
         setIsSkewEnabled(parsedSettings.isSkewEnabled ?? defaultSettings.isSkewEnabled);
-        setIsAnimationEnabled(parsedSettings.isAnimationEnabled ?? defaultSettings.isAnimationEnabled);
+        setIsAnimationEnabled(
+          parsedSettings.isAnimationEnabled ?? defaultSettings.isAnimationEnabled
+        );
       }
     } catch (error) {
       console.error("Error loading settings:", error);
@@ -62,21 +64,23 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
   // Save settings to localStorage when they change
   useEffect(() => {
     if (typeof window === "undefined") return;
-    
+
     try {
-      localStorage.setItem("site-settings", JSON.stringify({
-        isDarkMode,
-        isSkewEnabled,
-        isAnimationEnabled,
-      }));
-      
+      localStorage.setItem(
+        "site-settings",
+        JSON.stringify({
+          isDarkMode,
+          isSkewEnabled,
+          isAnimationEnabled,
+        })
+      );
+
       // Apply light/dark mode class to html element
       if (isDarkMode) {
         document.documentElement.classList.remove("light-mode");
       } else {
         document.documentElement.classList.add("light-mode");
       }
-      
     } catch (error) {
       console.error("Error saving settings:", error);
     }
@@ -84,7 +88,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
 
   // Toggle functions
   const toggleDarkMode = () => {
-    setIsDarkMode(prev => {
+    setIsDarkMode((prev) => {
       const newValue = !prev;
       // Immediately apply the class change for a more responsive feel
       if (typeof window !== "undefined") {
@@ -97,14 +101,14 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
       return newValue;
     });
   };
-  const toggleSkew = () => setIsSkewEnabled(prev => !prev);
-  const toggleAnimation = () => setIsAnimationEnabled(prev => !prev);
-  
+  const toggleSkew = () => setIsSkewEnabled((prev) => !prev);
+  const toggleAnimation = () => setIsAnimationEnabled((prev) => !prev);
+
   // Combined toggle for both skew and animation
   const toggleEffects = () => {
     // Get current state
     const currentState = isSkewEnabled && isAnimationEnabled;
-    
+
     // Toggle both to the same new state
     const newState = !currentState;
     setIsSkewEnabled(newState);
