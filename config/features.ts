@@ -3,7 +3,7 @@
  */
 export const features = {
   // Content sections
-  showWork: false,
+  showWork: true,
   showThoughts: false,
   showResume: false,
 };

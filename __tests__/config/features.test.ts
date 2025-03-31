@@ -15,9 +15,9 @@ describe("Feature Flags Configuration", () => {
     });
   });
 
-  it("should have work and thoughts sections disabled by default", () => {
-    // These should be false for initial launch
-    expect(features.showWork).toBe(false);
+  it("should have the work section enabled and thoughts section disabled", () => {
+    // Work section should be enabled, thoughts still disabled
+    expect(features.showWork).toBe(true);
     expect(features.showThoughts).toBe(false);
   });
 
