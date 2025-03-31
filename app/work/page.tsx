@@ -15,6 +15,73 @@ const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
   ssr: true,
 });
 
+interface WorkItemProps {
+  project: {
+    id: string;
+    title: string;
+    subtitle: string;
+    summary: string;
+    image: string;
+    link?: string;
+  };
+  isAnimationEnabled: boolean;
+}
+
+// WorkItem component for individual project cards
+function WorkItem({ project, isAnimationEnabled }: WorkItemProps) {
+  const CardContent = (
+    <GlitchCard
+      className="h-full flex flex-col"
+      glitchEffect={isAnimationEnabled}
+      glitchIntensity="light"
+      glitchOnHover={true}
+    >
+      <div className="relative w-full h-64 mb-6 overflow-hidden punk-border">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className={`object-cover ${isAnimationEnabled ? "transition-transform duration-700 hover:scale-110" : ""}`}
+        />
+      </div>
+
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h2>
+          <p className="font-mono text-accent mb-4">{project.subtitle}</p>
+          {project.summary !== "tk" && (
+            <p className="text-lg mb-6">{project.summary}</p>
+          )}
+        </div>
+
+        <div className="mt-auto">
+          {project.link ? (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center font-mono text-accent hover:underline"
+            >
+              View project
+              <ExternalLink className="ml-2 h-4 w-4" />
+            </a>
+          ) : (
+            <Link
+              href={`/work/${project.id}`}
+              className="inline-flex items-center font-mono text-accent hover:underline"
+            >
+              View case study
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          )}
+        </div>
+      </div>
+    </GlitchCard>
+  );
+
+  return CardContent;
+}
+
 export default function Work() {
   const { isAnimationEnabled } = useSettings();
   const { accentColor } = useAccentColor();
@@ -29,47 +96,15 @@ export default function Work() {
         </p>
       </SkewedContainer>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         {workData.projects.map((project, index) => (
           <SkewedContainer 
             key={project.id} 
-            intensity={index % 2 === 0 ? "medium" : "light"}
+            intensity="light"
             skewOnLoad={true}
-            className={`${index % 2 === 0 ? "lg:translate-y-8" : ""}`}
+            className={index % 3 === 1 ? "md:translate-y-4" : index % 3 === 2 ? "md:translate-y-8" : ""}
           >
-            <GlitchCard
-              className="h-full flex flex-col"
-              glitchEffect={isAnimationEnabled}
-              glitchIntensity="light"
-              glitchOnHover={true}
-            >
-              <div className="relative w-full h-64 mb-6 overflow-hidden punk-border">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  className={`object-cover ${isAnimationEnabled ? "transition-transform duration-700 hover:scale-110" : ""}`}
-                />
-              </div>
-
-              <div className="flex-1 flex flex-col">
-                <div className="flex-1">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h2>
-                  <p className="font-mono text-accent mb-4">{project.subtitle}</p>
-                  <p className="text-lg mb-6">{project.summary}</p>
-                </div>
-
-                <div className="mt-auto">
-                  <Link
-                    href={`/work/${project.id}`}
-                    className="inline-flex items-center font-mono text-accent hover:underline"
-                  >
-                    View case study
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            </GlitchCard>
+            <WorkItem project={project} isAnimationEnabled={isAnimationEnabled} />
           </SkewedContainer>
         ))}
       </div>

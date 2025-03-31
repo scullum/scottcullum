@@ -1,39 +1,92 @@
 {
   "projects": [
     {
-      "id": "adt",
-      "title": "ADT",
-      "subtitle": "From alarm company to smart home platform",
-      "summary": "Led the technical strategy and implementation for ADT's transformation from a traditional security company to a modern smart home platform, integrating IoT devices and creating a seamless user experience.",
-      "image": "/placeholders/adt.svg"
+      "id": "wwf-together",
+      "title": "WWF Together",
+      "subtitle": "Interactive experience for wildlife conservation",
+      "summary": "tk",
+      "image": "/placeholders/wwf-together.svg",
+      "link": "https://akqa.com/work/wwf/together"
     },
     {
-      "id": "red-antler",
-      "title": "Red Antler",
-      "subtitle": "Building a digital practice for brand-led innovation",
-      "summary": "Established and scaled the digital practice at Red Antler, working with venture-backed startups and Fortune 500 companies to create digital products that embody their brand strategy.",
-      "image": "/placeholders/red-antler.svg"
+      "id": "verizon-express",
+      "title": "Verizon Express Store",
+      "subtitle": "Streamlined digital retail experience",
+      "summary": "tk",
+      "image": "/placeholders/verizon.svg",
+      "link": "https://www.akqa.com/work/verizon/verizon-express/"
     },
     {
-      "id": "wwt",
-      "title": "World Wide Technology",
-      "subtitle": "Enterprise innovation at scale",
-      "summary": "Directed cross-functional teams to deliver enterprise-grade solutions for Fortune 100 clients, balancing technical excellence with business objectives and user needs.",
-      "image": "/placeholders/wwt.svg"
+      "id": "expressable",
+      "title": "Expressable",
+      "subtitle": "Digital speech therapy platform",
+      "summary": "tk",
+      "image": "/placeholders/expressable.svg",
+      "link": "https://www.expressable.com"
     },
     {
-      "id": "ai-exploration",
-      "title": "AI Capability Exploration",
-      "subtitle": "From hype to practical application",
-      "summary": "Guided organizations through the AI landscape, helping them identify meaningful applications of machine learning and generative AI that solve real business problems.",
-      "image": "/placeholders/ai-exploration.svg"
+      "id": "fallout-4",
+      "title": "Fallout 4",
+      "subtitle": "Post-apocalyptic gaming experience",
+      "summary": "tk",
+      "image": "/placeholders/fallout.svg",
+      "link": "https://fallout.bethesda.net/en/games/fallout-4"
     },
     {
-      "id": "startup-advisory",
-      "title": "Startup Advisory",
-      "subtitle": "Technical guidance for early-stage ventures",
-      "summary": "Provided strategic and technical guidance to early-stage startups, helping them make informed decisions about technology stack, architecture, and team building.",
-      "image": "/placeholders/startup-advisory.svg"
+      "id": "audi-usa",
+      "title": "AudiUSA.com",
+      "subtitle": "Premium automotive digital experience",
+      "summary": "tk",
+      "image": "/placeholders/audi.svg",
+      "link": "https://www.akqa.com/work/audi/audiusa-com/"
+    },
+    {
+      "id": "watch-dogs",
+      "title": "Watch Dogs Digital Shadow",
+      "subtitle": "Interactive digital privacy experience",
+      "summary": "tk",
+      "image": "/placeholders/watchdogs.svg",
+      "link": "https://www.youtube.com/watch?v=Dvn5aegzcts"
+    },
+    {
+      "id": "a6-ipad",
+      "title": "A6 iPad",
+      "subtitle": "Luxury automotive tablet experience",
+      "summary": "tk",
+      "image": "/placeholders/a6ipad.svg",
+      "link": "https://vimeo.com/85510381"
+    },
+    {
+      "id": "gap-stylestream",
+      "title": "Gap 1969 Stylestream",
+      "subtitle": "Fashion digital content platform",
+      "summary": "tk",
+      "image": "/placeholders/stylestream.svg",
+      "link": "https://www.shirabogart.com/gap-1969-stream"
+    },
+    {
+      "id": "shopify-ventures",
+      "title": "Shopify Ventures",
+      "subtitle": "E-commerce investment platform",
+      "summary": "tk",
+      "image": "/placeholders/shopifyvc.svg",
+      "link": "https://shopify.vc/"
+    },
+    {
+      "id": "guarantors",
+      "title": "Guarantors",
+      "subtitle": "Rental guarantee financial platform",
+      "summary": "tk",
+      "image": "/placeholders/guarantors.svg",
+      "link": "https://www.theguarantors.com/"
+    },
+    {
+      "id": "lifelines",
+      "title": "Lifelines",
+      "subtitle": "Healthcare digital platform",
+      "summary": "tk",
+      "image": "/placeholders/lifelines.svg",
+      "link": "https://www.lifelines.com/"
     }
   ]
 }
