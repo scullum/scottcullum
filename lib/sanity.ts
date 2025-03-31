@@ -1,7 +1,7 @@
 /**
  * Utility functions for fetching data from Sanity
  */
-import { sanityClient } from "@/sanity/config";
+import { getClient } from "@/sanity/config";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { urlForImage } from "@/sanity/config";
 
@@ -9,7 +9,8 @@ import { urlForImage } from "@/sanity/config";
  * Fetch all work items with optional filtering
  */
 export async function getWorks() {
-  return sanityClient.fetch(
+  const client = getClient();
+  return client.fetch(
     `*[_type == "work"] | order(publishedAt desc) {
       _id,
       title,
@@ -29,7 +30,8 @@ export async function getWorks() {
  * Fetch a single work item by slug
  */
 export async function getWorkBySlug(slug: string) {
-  return sanityClient.fetch(
+  const client = getClient();
+  return client.fetch(
     `*[_type == "work" && slug.current == $slug][0] {
       _id,
       title,
@@ -51,7 +53,8 @@ export async function getWorkBySlug(slug: string) {
  * Fetch all thoughts/blog posts with optional filtering
  */
 export async function getThoughts() {
-  return sanityClient.fetch(
+  const client = getClient();
+  return client.fetch(
     `*[_type == "thought"] | order(publishedAt desc) {
       _id,
       title,
@@ -69,7 +72,8 @@ export async function getThoughts() {
  * Fetch a single thought/blog post by slug
  */
 export async function getThoughtBySlug(slug: string) {
-  return sanityClient.fetch(
+  const client = getClient();
+  return client.fetch(
     `*[_type == "thought" && slug.current == $slug][0] {
       _id,
       title,
@@ -89,14 +93,16 @@ export async function getThoughtBySlug(slug: string) {
  * Fetch about page content
  */
 export async function getAboutContent() {
-  return sanityClient.fetch(`*[_type == "about"][0]`);
+  const client = getClient();
+  return client.fetch(`*[_type == "about"][0]`);
 }
 
 /**
  * Fetch one-liners for rotating text component
  */
 export async function getOneLiners() {
-  return sanityClient.fetch(
+  const client = getClient();
+  return client.fetch(
     `*[_type == "oneLiner" && active == true] {
       _id,
       text,
