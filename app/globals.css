@@ -145,6 +145,7 @@
   a {
     color: var(--accent);
     transition: all 0.2s;
+    cursor: pointer !important;
   }
 
   main {
@@ -191,6 +192,7 @@
     color: white;
     transition: color 0.2s;
     position: relative;
+    cursor: pointer !important;
   }
 
   .nav-link::after {
@@ -300,6 +302,7 @@
 /* No underline for thought cards */
 .thought-card-link {
   text-decoration: none !important;
+  cursor: pointer !important;
 }
 .thought-card-link:hover {
   text-decoration: none !important;
