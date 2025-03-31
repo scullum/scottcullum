@@ -1,62 +1,107 @@
+"use client";
+
 import GlitchCard from "@/components/glitch-card";
 import workData from "@/data/work.json";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { SkewedH1 } from "@/components/skewed-elements";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import { SkewedH1, SkewedH2 } from "@/components/skewed-elements";
+import { useSettings } from "@/contexts/settings-context";
+import { useAccentColor } from "@/contexts/color-context";
+import dynamic from "next/dynamic";
+
+// Import SkewedContainer for unique skew effects
+const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
+  ssr: true,
+});
 
 export default function Work() {
+  const { isAnimationEnabled } = useSettings();
+  const { accentColor } = useAccentColor();
+  
   return (
     <div className="py-12">
-      <SkewedH1 className="text-5xl md:text-6xl mb-12">Work</SkewedH1>
+      <SkewedContainer intensity="medium" skewOnLoad={true}>
+        <SkewedH1 className="text-5xl md:text-6xl mb-8">Selected Work</SkewedH1>
+        <p className="text-xl md:text-2xl max-w-3xl mb-16" style={{ color: accentColor }}>
+          A showcase of projects where I&apos;ve led technical strategy, innovation, and implementation
+          across various industries and challenges.
+        </p>
+      </SkewedContainer>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
         {workData.projects.map((project, index) => (
-          <GlitchCard
-            key={project.id}
-            className={`${index % 2 === 0 ? "md:translate-y-8" : ""} transform ${
-              index % 3 === 0
-                ? "skew-x-1 skew-y-0.5"
-                : index % 3 === 1
-                  ? "skew-x-2 -skew-y-1"
-                  : "-skew-x-1.5 skew-y-1.5"
-            }`}
-            glitchEffect={true}
+          <SkewedContainer 
+            key={project.id} 
+            intensity={index % 2 === 0 ? "medium" : "light"}
+            skewOnLoad={true}
+            className={`${index % 2 === 0 ? "lg:translate-y-8" : ""}`}
           >
-            <div className="relative w-full h-48 mb-4 overflow-hidden">
-              <Image
-                src={project.image || "/placeholder.svg"}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-500 hover:scale-105"
-              />
-            </div>
-
-            <h2 className="text-2xl mb-2">{project.title}</h2>
-            <p className="text-accent font-mono mb-4">{project.subtitle}</p>
-            <p className="mb-6">{project.summary}</p>
-
-            <Link
-              href={`/work/${project.id}`}
-              className="inline-flex items-center font-mono text-accent hover:underline"
+            <GlitchCard
+              className="h-full flex flex-col"
+              glitchEffect={isAnimationEnabled}
+              glitchIntensity="light"
+              glitchOnHover={true}
             >
-              View details
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </GlitchCard>
+              <div className="relative w-full h-64 mb-6 overflow-hidden punk-border">
+                <Image
+                  src={project.image || "/placeholder.svg"}
+                  alt={project.title}
+                  fill
+                  className={`object-cover ${isAnimationEnabled ? "transition-transform duration-700 hover:scale-110" : ""}`}
+                />
+              </div>
+
+              <div className="flex-1 flex flex-col">
+                <div className="flex-1">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h2>
+                  <p className="font-mono text-accent mb-4">{project.subtitle}</p>
+                  <p className="text-lg mb-6">{project.summary}</p>
+                </div>
+
+                <div className="mt-auto">
+                  <Link
+                    href={`/work/${project.id}`}
+                    className="inline-flex items-center font-mono text-accent hover:underline"
+                  >
+                    View case study
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </GlitchCard>
+          </SkewedContainer>
         ))}
       </div>
 
-      <div className="mt-16 text-center">
-        <p className="text-xl mb-8">Want to see how we might work together?</p>
+      <SkewedContainer intensity="medium" skewOnLoad={true}>
+        <div className="text-center bg-black text-white p-12 punk-border">
+          <SkewedH2 className="text-3xl md:text-4xl mb-6 text-accent">Ready to collaborate?</SkewedH2>
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+            I&apos;m always interested in discussing new projects, creative challenges, and opportunities to create impact through technology.
+          </p>
 
-        <Link
-          href="/contact"
-          className="punk-border inline-flex items-center justify-center px-8 py-3 text-lg font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
-        >
-          Get in touch
-        </Link>
-      </div>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Link
+              href="mailto:scott@scullum.com"
+              className="punk-border inline-flex items-center justify-center px-8 py-4 text-lg font-mono uppercase bg-accent text-black hover:bg-white hover:text-black transition-colors duration-200 no-underline"
+            >
+              Get in touch
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+            
+            <Link
+              href="https://www.linkedin.com/in/scottcullum/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="punk-border inline-flex items-center justify-center px-8 py-4 text-lg font-mono uppercase bg-white text-black hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
+            >
+              LinkedIn
+              <ExternalLink className="ml-2 h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+      </SkewedContainer>
     </div>
   );
 }
