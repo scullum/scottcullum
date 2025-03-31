@@ -5,35 +5,35 @@
       "title": "ADT",
       "subtitle": "From alarm company to smart home platform",
       "summary": "Led the technical strategy and implementation for ADT's transformation from a traditional security company to a modern smart home platform, integrating IoT devices and creating a seamless user experience.",
-      "image": "/placeholder.svg?height=600&width=800&text=ADT+Smart+Home+Platform"
+      "image": "/placeholders/adt.svg"
     },
     {
       "id": "red-antler",
       "title": "Red Antler",
       "subtitle": "Building a digital practice for brand-led innovation",
       "summary": "Established and scaled the digital practice at Red Antler, working with venture-backed startups and Fortune 500 companies to create digital products that embody their brand strategy.",
-      "image": "/placeholder.svg?height=600&width=800&text=Red+Antler+Digital+Practice"
+      "image": "/placeholders/red-antler.svg"
     },
     {
       "id": "wwt",
       "title": "World Wide Technology",
       "subtitle": "Enterprise innovation at scale",
       "summary": "Directed cross-functional teams to deliver enterprise-grade solutions for Fortune 100 clients, balancing technical excellence with business objectives and user needs.",
-      "image": "/placeholder.svg?height=600&width=800&text=WWT+Enterprise+Solutions"
+      "image": "/placeholders/wwt.svg"
     },
     {
       "id": "ai-exploration",
       "title": "AI Capability Exploration",
       "subtitle": "From hype to practical application",
       "summary": "Guided organizations through the AI landscape, helping them identify meaningful applications of machine learning and generative AI that solve real business problems.",
-      "image": "/placeholder.svg?height=600&width=800&text=AI+Capability+Exploration"
+      "image": "/placeholders/ai-exploration.svg"
     },
     {
       "id": "startup-advisory",
       "title": "Startup Advisory",
       "subtitle": "Technical guidance for early-stage ventures",
       "summary": "Provided strategic and technical guidance to early-stage startups, helping them make informed decisions about technology stack, architecture, and team building.",
-      "image": "/placeholder.svg?height=600&width=800&text=Startup+Advisory"
+      "image": "/placeholders/startup-advisory.svg"
     }
   ]
 }
