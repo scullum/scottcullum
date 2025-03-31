@@ -52,6 +52,18 @@
 }
 
 @layer base {
+  /* Global cursor styles for all interactive elements */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"],
+  select,
+  summary,
+  .interactive {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
   body {
     @apply antialiased;
     background-color: var(--background);
@@ -146,6 +158,9 @@
     color: var(--accent);
     transition: all 0.2s;
     cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 1;
   }
 
   main {
@@ -183,6 +198,7 @@
     border: 2px solid white;
     transform: translate(-0.25rem, -0.25rem);
     pointer-events: none;
+    z-index: 0;
   }
 
   /* Updated nav-link styles to remove underline and accent color on hover */
@@ -193,6 +209,8 @@
     transition: color 0.2s;
     position: relative;
     cursor: pointer !important;
+    pointer-events: auto !important;
+    z-index: 2;
   }
 
   .nav-link::after {
@@ -303,6 +321,9 @@
 .thought-card-link {
   text-decoration: none !important;
   cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 1;
 }
 .thought-card-link:hover {
   text-decoration: none !important;
