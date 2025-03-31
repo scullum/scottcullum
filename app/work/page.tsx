@@ -91,8 +91,7 @@ export default function Work() {
       <SkewedContainer intensity="medium" skewOnLoad={true}>
         <SkewedH1 className="text-5xl md:text-6xl mb-8">Selected Work</SkewedH1>
         <p className="text-xl md:text-2xl max-w-3xl mb-16" style={{ color: accentColor }}>
-          A showcase of projects where I&apos;ve led technical strategy, innovation, and implementation
-          across various industries and challenges.
+          A showcase of projects where I&apos;ve led technical strategy, innovation, and implementation across various industries and challenges.
         </p>
       </SkewedContainer>
 
