@@ -17,8 +17,13 @@ const RotatingText = ({
   glitchOnRotate = false,
 }: RotatingTextProps) => {
   const { isAnimationEnabled } = useSettings();
-  // Generate a random starting index
-  const randomStartIndex = useMemo(() => Math.floor(Math.random() * phrases.length), [phrases]);
+  // Use a stable initial index for SSR to prevent hydration errors
+  const [randomStartIndex, setRandomStartIndex] = useState(0);
+  
+  // Update to random index only after hydration is complete
+  useEffect(() => {
+    setRandomStartIndex(Math.floor(Math.random() * phrases.length));
+  }, [phrases.length]);
   
   const [currentIndex, setCurrentIndex] = useState(randomStartIndex);
   const [isVisible, setIsVisible] = useState(true);
@@ -114,14 +119,13 @@ const RotatingText = ({
     };
   }, [interval, transitionToNextPhrase, isAnimationEnabled, phrases]);
 
-  // Reset to random phrase when animations are toggled off
+  // Reset to current phrase when animations are toggled off
   useEffect(() => {
     if (!isAnimationEnabled) {
-      setCurrentIndex(randomStartIndex);
-      setDisplayText(phrases[randomStartIndex]);
+      setDisplayText(phrases[currentIndex]);
       setIsVisible(true);
     }
-  }, [isAnimationEnabled, phrases, randomStartIndex]);
+  }, [isAnimationEnabled, phrases, currentIndex]);
 
   // Memoize the current phrase
   const currentPhrase = useMemo(() => phrases[currentIndex], [phrases, currentIndex]);

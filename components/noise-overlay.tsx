@@ -7,12 +7,22 @@ const NoiseOverlay = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { isAnimationEnabled, isDarkMode } = useSettings();
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  // Track if component is mounted to prevent hydration issues
+  const isMountedRef = useRef(false);
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  useEffect(() => {
+    // Set mounted flag
+    isMountedRef.current = true;
+    
+    // Delay initialization slightly to ensure hydration is complete
+    const initTimeout = setTimeout(() => {
+      if (!isMountedRef.current) return;
+      
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
 
     // Clear the canvas if animations are disabled
     if (!isAnimationEnabled) {
@@ -115,9 +125,20 @@ const NoiseOverlay = () => {
 
     // Cleanup
     return () => {
+      isMountedRef.current = false;
       window.removeEventListener("resize", debouncedResize);
       clearTimeout(resizeTimeout);
-      cancelAnimationFrame(animationFrameId);
+      clearTimeout(initTimeout);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
+    }, 100); // Add delay in milliseconds
+    
+    // Cleanup for the outer useEffect
+    return () => {
+      isMountedRef.current = false;
+      clearTimeout(initTimeout);
     };
   }, [isAnimationEnabled, isDarkMode]);
 

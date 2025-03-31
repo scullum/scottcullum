@@ -77,18 +77,38 @@ export function GlitchName({
       return;
     }
 
-    // Initial effects
-    glitchText();
-    rotateText();
+    // Flag to ensure we only run client-side after hydration
+    let isMounted = true;
+    
+    // Delay initial effects slightly to ensure hydration is complete
+    const initialEffectsTimeout = setTimeout(() => {
+      if (isMounted) {
+        glitchText();
+        rotateText();
+      }
+    }, 100);
 
-    // Set up intervals
-    const glitchTimer = setInterval(glitchText, glitchInterval);
-    const rotationTimer = setInterval(rotateText, rotationInterval);
+    // Set up intervals with a slight delay
+    const glitchTimer = setTimeout(() => {
+      if (isMounted) {
+        const interval = setInterval(glitchText, glitchInterval);
+        return () => clearInterval(interval);
+      }
+    }, 200);
+    
+    const rotationTimer = setTimeout(() => {
+      if (isMounted) {
+        const interval = setInterval(rotateText, rotationInterval);
+        return () => clearInterval(interval);
+      }
+    }, 300);
 
-    // Clean up intervals on unmount
+    // Clean up intervals and timeouts on unmount
     return () => {
-      clearInterval(glitchTimer);
-      clearInterval(rotationTimer);
+      isMounted = false;
+      clearTimeout(initialEffectsTimeout);
+      clearTimeout(glitchTimer);
+      clearTimeout(rotationTimer);
     };
   }, [glitchText, rotateText, glitchInterval, rotationInterval, isAnimationEnabled, name]);
 

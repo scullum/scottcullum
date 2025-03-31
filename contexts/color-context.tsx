@@ -59,26 +59,32 @@ export function ColorProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const previousColorRef = useRef<string>(colorOptions[0].value);
 
-  // Change color on initial load and on pathname change
+  // Initialize with stable values for SSR to prevent hydration errors
   useEffect(() => {
-    // Only run on client-side
+    // Only run on client-side after initial hydration
     if (typeof window !== "undefined") {
+      // Flag to track if this is the first render after hydration
+      const isFirstRender = previousColorRef.current === colorOptions[0].value;
+      
       // Get a random color that's different from the previous one
       let randomIndex: number;
       let selectedColor: (typeof colorOptions)[0];
 
-      do {
-        randomIndex = Math.floor(Math.random() * colorOptions.length);
-        selectedColor = colorOptions[randomIndex];
-      } while (selectedColor.value === previousColorRef.current && colorOptions.length > 1);
+      // Only randomize if it's a pathname change or first render
+      if (isFirstRender || pathname) {
+        do {
+          randomIndex = Math.floor(Math.random() * colorOptions.length);
+          selectedColor = colorOptions[randomIndex];
+        } while (selectedColor.value === previousColorRef.current && colorOptions.length > 1);
 
-      setAccentColor(selectedColor.value);
-      setAccentColorRgb(selectedColor.rgb);
-      setAccentColorName(selectedColor.name);
-      previousColorRef.current = selectedColor.value;
+        setAccentColor(selectedColor.value);
+        setAccentColorRgb(selectedColor.rgb);
+        setAccentColorName(selectedColor.name);
+        previousColorRef.current = selectedColor.value;
 
-      // Update CSS styles with the new color
-      updateAccentColorStyles(selectedColor.value, selectedColor.rgb);
+        // Update CSS styles with the new color
+        updateAccentColorStyles(selectedColor.value, selectedColor.rgb);
+      }
     }
   }, [pathname]); // Re-run when pathname changes
 
