@@ -1,6 +1,7 @@
 "use client";
 
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode, useMemo, CSSProperties } from "react";
+import { useSettings } from "@/contexts/settings-context";
 
 interface SkewedParagraphGroupProps {
   children: ReactNode;
@@ -17,6 +18,9 @@ export function SkewedParagraphGroup({
   className = "",
   intensity = "light",
 }: SkewedParagraphGroupProps) {
+  // Get the skew enabled setting from context
+  const { isSkewEnabled } = useSettings();
+  
   // Generate a single random skew value for all children
   const skewValues = useMemo(() => {
     // Define intensity ranges
@@ -33,29 +37,26 @@ export function SkewedParagraphGroup({
     return { skewX, skewY };
   }, [intensity]);
 
-  // Apply the same skew to all children
-  const style = {
-    transform: `skew(${skewValues.skewX}deg, ${skewValues.skewY}deg)`,
+  // Apply the same skew to all children, but only if skew is enabled
+  const skewStyle: CSSProperties = {
+    transform: isSkewEnabled ? `skew(${skewValues.skewX}deg, ${skewValues.skewY}deg)` : "none",
     transition: "transform 0.2s ease-out",
-    display: "block",
   };
 
+  // Apply the skew to each child individually to preserve spacing
   return (
     <div className={className}>
       {React.Children.map(children, (child) => {
-        // Check if the child is a valid React element
-        if (React.isValidElement(child)) {
-          // Clone the element and apply the skew style to it directly
-          return React.cloneElement(child, {
-            style: {
-              ...style,
-              ...(child.props.style || {}),
-            },
-            className: `${child.props.className || ""} skewed-paragraph`,
-          });
+        if (!React.isValidElement(child)) {
+          return <div style={skewStyle}>{child}</div>;
         }
-        // For non-element children (like text), wrap them in a div with the skew
-        return <div style={style}>{child}</div>;
+        
+        // For each child element, create a wrapper that applies the skew
+        return (
+          <div style={skewStyle} className="skewed-paragraph-wrapper">
+            {child}
+          </div>
+        );
       })}
     </div>
   );
