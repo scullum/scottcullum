@@ -3,6 +3,7 @@ import { FileText } from "lucide-react";
 import aboutData from "@/data/about.json";
 import { SkewedH1, SkewedH2 } from "@/components/skewed-elements";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { SkewedParagraphGroup } from "@/components/skewed-paragraph-group";
 import { features } from "@/config/features";
 
@@ -11,10 +12,7 @@ const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
   ssr: true,
 });
 
-// Import the DistortedImage component dynamically
-const DistortedImage = dynamic(() => import("@/components/distorted-image"), {
-  ssr: true,
-});
+// DistortedImage temporarily removed to troubleshoot loading issues
 
 export default function About() {
   return (
@@ -37,14 +35,13 @@ export default function About() {
         <div>
           <GlitchCard className="h-full">
             <div className="relative w-full h-[400px] mb-4 overflow-hidden">
-              <DistortedImage
+              {/* Temporarily using standard Image component to test if it resolves the issue */}
+              <Image
                 src="/me.webp"
                 alt="Scott M. Cullum"
-                width={600}
-                height={800}
-                className="w-full h-full object-cover"
-                distortionIntensity="medium"
+                fill
                 priority
+                className="w-full h-full object-cover"
               />
             </div>
           </GlitchCard>
