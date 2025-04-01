@@ -3,7 +3,6 @@ import { FileText } from "lucide-react";
 import aboutData from "@/data/about.json";
 import { SkewedH1, SkewedH2 } from "@/components/skewed-elements";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { SkewedParagraphGroup } from "@/components/skewed-paragraph-group";
 import { features } from "@/config/features";
 
@@ -12,7 +11,10 @@ const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
   ssr: true,
 });
 
-// DistortedImage temporarily removed to troubleshoot loading issues
+// Import the RotatingProfileImage component dynamically
+const RotatingProfileImage = dynamic(() => import("@/components/rotating-profile-image"), {
+  ssr: false // Use client-side only to ensure proper rotation
+});
 
 export default function About() {
   return (
@@ -35,13 +37,10 @@ export default function About() {
         <div>
           <GlitchCard className="h-full">
             <div className="relative w-full h-[400px] mb-4 overflow-hidden">
-              {/* Temporarily using standard Image component to test if it resolves the issue */}
-              <Image
-                src="/me.webp"
+              <RotatingProfileImage
                 alt="Scott M. Cullum"
-                fill
-                priority
-                className="w-full h-full object-cover"
+                interval={7000} // Rotate every 7 seconds
+                className="w-full h-full"
               />
             </div>
           </GlitchCard>
