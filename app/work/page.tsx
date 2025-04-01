@@ -15,89 +15,15 @@ const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
   ssr: true,
 });
 
-interface WorkItemProps {
-  project: {
-    id: string;
-    title: string;
-    subtitle: string;
-    summary: string;
-    image: string;
-    link?: string;
-    hasPage?: boolean;
-    aspectRatio?: string;
-  };
-  isAnimationEnabled: boolean;
-}
-
-// WorkItem component for individual project cards
-function WorkItem({ project, isAnimationEnabled }: WorkItemProps) {
-  // Calculate aspect ratio style based on the project's aspectRatio property
-  const getAspectRatioStyle = () => {
-    if (!project.aspectRatio) return {};
-    
-    // Convert aspect ratio string (e.g., "16/9") to padding-bottom percentage
-    const [width, height] = project.aspectRatio.split('/');
-    const paddingBottom = `${(parseInt(height) / parseInt(width)) * 100}%`;
-    
-    return {
-      paddingBottom,
-      height: 0
-    };
-  };
-
-  const CardContent = (
-    <GlitchCard
-      className="h-full flex flex-col"
-      glitchEffect={isAnimationEnabled}
-      glitchIntensity="light"
-      glitchOnHover={true}
-    >
-      <div 
-        className="relative w-full mb-6 overflow-hidden punk-border"
-        style={project.aspectRatio ? getAspectRatioStyle() : { height: '16rem' }}
-      >
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className={`object-cover ${isAnimationEnabled ? "transition-transform duration-700 hover:scale-110" : ""}`}
-        />
-      </div>
-
-      <div className="flex-1 flex flex-col">
-        <div className="flex-1">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-accent">{project.title}</h2>
-          <p className="font-mono mb-4">{project.subtitle}</p>
-          {/* Description hidden for now */}
-          {/* <p className="text-lg mb-6 text-[var(--foreground)]">{project.summary}</p> */}
-        </div>
-
-        <div className="mt-auto">
-          {!project.hasPage && project.link ? (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center font-mono text-accent hover:underline"
-            >
-              View project
-              <ExternalLink className="ml-2 h-4 w-4" />
-            </a>
-          ) : (
-            <Link
-              href={`/work/${project.id}`}
-              className="inline-flex items-center font-mono text-accent hover:underline"
-            >
-              View case study
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          )}
-        </div>
-      </div>
-    </GlitchCard>
-  );
-
-  return CardContent;
+interface ProjectType {
+  id: string;
+  title: string;
+  subtitle: string;
+  summary: string;
+  image: string;
+  link?: string;
+  hasPage?: boolean;
+  aspectRatio?: string;
 }
 
 export default function Work() {
@@ -113,34 +39,58 @@ export default function Work() {
         </p>
       </SkewedContainer>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {workData.projects.map((project, index) => {
-          // Create different skew intensities based on index
-          const intensities = ["light", "medium", "heavy"] as const;
-          const intensity = intensities[index % intensities.length];
-          
-          // Create a unique vertical offset for each card
-          const getVerticalOffset = (index: number) => {
-            const baseOffsets = [0, 4, 8, 2, 6]; // Various offsets in rems
-            return baseOffsets[index % baseOffsets.length];
-          };
-          
-          // Create a wrapper div with rotation for additional uniqueness
-          return (
-            <div 
-              key={project.id}
-              className={`transform md:translate-y-${getVerticalOffset(index)}`}
-            >
-              <SkewedContainer 
-                intensity={intensity}
-                skewOnLoad={true}
-                className="h-full"
-              >
-                <WorkItem project={project} isAnimationEnabled={isAnimationEnabled} />
-              </SkewedContainer>
+      <div className="space-y-8 mb-16">
+        {workData.projects.map((project: ProjectType, index) => (
+          <GlitchCard
+            key={project.id}
+            className={`block hover:border-accent transition-colors duration-200 transform ${index % 3 === 0 ? "skew-x-1.5 -skew-y-0.5" : index % 3 === 1 ? "-skew-x-1 skew-y-1" : "skew-x-0.5 skew-y-1.5"}`}
+            glitchEffect={isAnimationEnabled}
+            glitchIntensity="light"
+            glitchOnHover={true}
+          >
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="md:w-1/3 relative h-48 md:h-auto">
+                <div className="relative w-full h-full overflow-hidden punk-border">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className={`object-cover ${isAnimationEnabled ? "transition-transform duration-700 hover:scale-110" : ""}`}
+                  />
+                </div>
+              </div>
+              <div className="md:w-2/3 flex flex-col justify-between">
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-2 text-accent">{project.title}</h2>
+                  <p className="font-mono mb-4">{project.subtitle}</p>
+                  {/* Description hidden for now */}
+                  {/* <p className="text-lg mb-6 text-[var(--foreground)]">{project.summary}</p> */}
+                </div>
+                <div className="mt-4">
+                  {!project.hasPage && project.link ? (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center font-mono text-accent hover:underline"
+                    >
+                      View project
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  ) : (
+                    <Link
+                      href={`/work/${project.id}`}
+                      className="inline-flex items-center font-mono text-accent hover:underline"
+                    >
+                      View case study
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  )}
+                </div>
+              </div>
             </div>
-          );
-        })}
+          </GlitchCard>
+        ))}
       </div>
 
       <SkewedContainer intensity="medium" skewOnLoad={true}>
