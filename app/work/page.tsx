@@ -68,7 +68,8 @@ function WorkItem({ project, isAnimationEnabled }: WorkItemProps) {
         <div className="flex-1">
           <h2 className="text-2xl md:text-3xl font-bold mb-2 text-accent">{project.title}</h2>
           <p className="font-mono mb-4">{project.subtitle}</p>
-          <p className="text-lg mb-6 text-[var(--foreground)]">{project.summary}</p>
+          {/* Description hidden for now */}
+          {/* <p className="text-lg mb-6 text-[var(--foreground)]">{project.summary}</p> */}
         </div>
 
         <div className="mt-auto">
@@ -113,16 +114,33 @@ export default function Work() {
       </SkewedContainer>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {workData.projects.map((project, index) => (
-          <SkewedContainer 
-            key={project.id} 
-            intensity="light"
-            skewOnLoad={true}
-            className={index % 3 === 1 ? "md:translate-y-4" : index % 3 === 2 ? "md:translate-y-8" : ""}
-          >
-            <WorkItem project={project} isAnimationEnabled={isAnimationEnabled} />
-          </SkewedContainer>
-        ))}
+        {workData.projects.map((project, index) => {
+          // Create different skew intensities based on index
+          const intensities = ["light", "medium", "heavy"] as const;
+          const intensity = intensities[index % intensities.length];
+          
+          // Create a unique vertical offset for each card
+          const getVerticalOffset = (index: number) => {
+            const baseOffsets = [0, 4, 8, 2, 6]; // Various offsets in rems
+            return baseOffsets[index % baseOffsets.length];
+          };
+          
+          // Create a wrapper div with rotation for additional uniqueness
+          return (
+            <div 
+              key={project.id}
+              className={`transform md:translate-y-${getVerticalOffset(index)}`}
+            >
+              <SkewedContainer 
+                intensity={intensity}
+                skewOnLoad={true}
+                className="h-full"
+              >
+                <WorkItem project={project} isAnimationEnabled={isAnimationEnabled} />
+              </SkewedContainer>
+            </div>
+          );
+        })}
       </div>
 
       <SkewedContainer intensity="medium" skewOnLoad={true}>
