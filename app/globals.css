@@ -9,12 +9,12 @@
   --noise-opacity: 0.05;
 
   /* Dark mode variables (default) */
-  --background: #000000;
+  --background: #1a1a1a; /* Dark gray background */
   --foreground: #ffffff;
   --muted: rgba(255, 255, 255, 0.7);
   --muted-foreground: rgba(255, 255, 255, 0.5);
   --border: rgba(255, 255, 255, 0.2);
-  --card: rgba(0, 0, 0, 0.8);
+  --card: rgba(26, 26, 26, 0.8); /* Updated to match background */
   --card-foreground: #ffffff;
 }
 

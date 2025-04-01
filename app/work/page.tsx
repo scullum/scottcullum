@@ -91,34 +91,7 @@ export default function Work() {
         ))}
       </div>
 
-      <SkewedContainer intensity="medium" skewOnLoad={true}>
-        <div className="text-center bg-black text-white p-12 punk-border">
-          <SkewedH2 className="text-3xl md:text-4xl mb-6 text-accent">Ready to collaborate?</SkewedH2>
-          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
-            I&apos;m always interested in discussing new projects, creative challenges, and opportunities to create impact through technology.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link
-              href="mailto:scott@scullum.com"
-              className="punk-border inline-flex items-center justify-center px-8 py-4 text-lg font-mono uppercase bg-accent text-black hover:bg-white hover:text-black transition-colors duration-200 no-underline"
-            >
-              Get in touch
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-            
-            <Link
-              href="https://www.linkedin.com/in/scottcullum/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="punk-border inline-flex items-center justify-center px-8 py-4 text-lg font-mono uppercase bg-white text-black hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
-            >
-              LinkedIn
-              <ExternalLink className="ml-2 h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </SkewedContainer>
+      {/* Collaboration section hidden as requested */}
     </div>
   );
 }
