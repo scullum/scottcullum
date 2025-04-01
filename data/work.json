@@ -1,39 +1,122 @@
 {
   "projects": [
     {
-      "id": "adt",
-      "title": "ADT",
-      "subtitle": "From alarm company to smart home platform",
-      "summary": "Led the technical strategy and implementation for ADT's transformation from a traditional security company to a modern smart home platform, integrating IoT devices and creating a seamless user experience.",
-      "image": "/placeholder.svg?height=600&width=800&text=ADT+Smart+Home+Platform"
+      "id": "wwf-together",
+      "title": "WWF Together",
+      "subtitle": "Interactive experience for wildlife conservation",
+      "summary": "Led the development of an award-winning interactive experience that connected users with endangered species through immersive storytelling and innovative interactions.",
+      "image": "/work/wwf-together.webp",
+      "link": "https://akqa.com/work/wwf/together",
+      "hasPage": false,
+      "aspectRatio": "4/3"
     },
     {
-      "id": "red-antler",
-      "title": "Red Antler",
-      "subtitle": "Building a digital practice for brand-led innovation",
-      "summary": "Established and scaled the digital practice at Red Antler, working with venture-backed startups and Fortune 500 companies to create digital products that embody their brand strategy.",
-      "image": "/placeholder.svg?height=600&width=800&text=Red+Antler+Digital+Practice"
+      "id": "verizon-express",
+      "title": "Verizon Express Store",
+      "subtitle": "Streamlined digital retail experience",
+      "summary": "Designed and implemented a streamlined digital retail experience that simplified the purchase process for Verizon customers while maintaining brand consistency.",
+      "image": "/work/verizon.webp",
+      "link": "https://www.akqa.com/work/verizon/verizon-express/",
+      "hasPage": false,
+      "aspectRatio": "4/3"
     },
     {
-      "id": "wwt",
-      "title": "World Wide Technology",
-      "subtitle": "Enterprise innovation at scale",
-      "summary": "Directed cross-functional teams to deliver enterprise-grade solutions for Fortune 100 clients, balancing technical excellence with business objectives and user needs.",
-      "image": "/placeholder.svg?height=600&width=800&text=WWT+Enterprise+Solutions"
+      "id": "expressable",
+      "title": "Expressable",
+      "subtitle": "Digital speech therapy platform",
+      "summary": "Created a comprehensive digital platform for speech therapy services, enabling remote therapy sessions and progress tracking for patients of all ages.",
+      "image": "/work/expressable.webp",
+      "link": "https://www.expressable.com",
+      "hasPage": false,
+      "aspectRatio": "4/3"
     },
     {
-      "id": "ai-exploration",
-      "title": "AI Capability Exploration",
-      "subtitle": "From hype to practical application",
-      "summary": "Guided organizations through the AI landscape, helping them identify meaningful applications of machine learning and generative AI that solve real business problems.",
-      "image": "/placeholder.svg?height=600&width=800&text=AI+Capability+Exploration"
+      "id": "fallout-4",
+      "title": "Fallout 4",
+      "subtitle": "Post-apocalyptic gaming experience",
+      "summary": "Contributed to the digital marketing strategy and interactive experiences for Bethesda's Fallout 4 launch, driving engagement and anticipation.",
+      "image": "/work/fallout.jpg",
+      "link": "https://fallout.bethesda.net/en/games/fallout-4",
+      "hasPage": false,
+      "aspectRatio": "16/9"
     },
     {
-      "id": "startup-advisory",
-      "title": "Startup Advisory",
-      "subtitle": "Technical guidance for early-stage ventures",
-      "summary": "Provided strategic and technical guidance to early-stage startups, helping them make informed decisions about technology stack, architecture, and team building.",
-      "image": "/placeholder.svg?height=600&width=800&text=Startup+Advisory"
+      "id": "audi-usa",
+      "title": "AudiUSA.com",
+      "subtitle": "Premium automotive digital experience",
+      "summary": "Redesigned the digital flagship for Audi USA, creating an immersive experience that balanced brand luxury with practical vehicle exploration and purchasing tools.",
+      "image": "/work/audi.webp",
+      "link": "https://www.akqa.com/work/audi/audiusa-com/",
+      "hasPage": false,
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "watch-dogs",
+      "title": "Watch Dogs Digital Shadow",
+      "subtitle": "Interactive digital privacy experience",
+      "summary": "Developed a viral marketing campaign for Ubisoft's Watch Dogs that demonstrated digital privacy vulnerabilities by analyzing users' social media presence.",
+      "image": "/work/watchdogs.jpg",
+      "link": "https://www.youtube.com/watch?v=Dvn5aegzcts",
+      "hasPage": false,
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "a6-ipad",
+      "title": "A6 iPad",
+      "subtitle": "Luxury automotive tablet experience",
+      "summary": "Created an innovative iPad application for Audi that showcased the A6 model's features and technology through interactive 3D visualizations and personalized configurations.",
+      "image": "/work/a6ipad.webp",
+      "link": "https://vimeo.com/85510381",
+      "hasPage": false,
+      "aspectRatio": "4/3"
+    },
+    {
+      "id": "volvo",
+      "title": "Volvo XC90",
+      "subtitle": "Immersive automotive experience",
+      "summary": "Designed and developed an immersive digital experience for the Volvo XC90 launch, highlighting the vehicle's innovative safety features and Scandinavian design.",
+      "image": "/work/volvo.jpg",
+      "hasPage": true,
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "stylestream",
+      "title": "Gap 1969 Stylestream",
+      "subtitle": "Fashion digital content platform",
+      "summary": "Built a dynamic content platform for Gap that showcased their 1969 denim collection through curated fashion stories and interactive lookbooks.",
+      "image": "/work/stylestream.jpg",
+      "link": "https://www.shirabogart.com/gap-1969-stream",
+      "hasPage": false,
+      "aspectRatio": "3/2"
+    },
+    {
+      "id": "shopify-ventures",
+      "title": "Shopify Ventures",
+      "subtitle": "E-commerce investment platform",
+      "summary": "Developed the digital presence for Shopify's venture capital arm, creating a platform that highlighted their investment strategy and portfolio companies.",
+      "image": "/work/shopifyvc.png",
+      "link": "https://shopify.vc/",
+      "hasPage": false,
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "guarantors",
+      "title": "Guarantors",
+      "subtitle": "Rental guarantee financial platform",
+      "summary": "Led the technical strategy for a fintech platform that revolutionized the rental market by providing guarantees for tenants and landlords, simplifying the rental process.",
+      "image": "/work/theguarantors.png",
+      "hasPage": true,
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "lifelines",
+      "title": "Lifelines",
+      "subtitle": "Healthcare digital platform",
+      "summary": "Created a healthcare platform that connected patients with specialized medical services, featuring secure telehealth capabilities and personalized care plans.",
+      "image": "/work/lifelines.png",
+      "link": "https://www.lifelines.com/",
+      "hasPage": false,
+      "aspectRatio": "16/9"
     }
   ]
 }

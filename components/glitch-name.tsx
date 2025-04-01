@@ -79,7 +79,7 @@ export function GlitchName({
 
     // Flag to ensure we only run client-side after hydration
     let isMounted = true;
-    
+
     // Delay initial effects slightly to ensure hydration is complete
     const initialEffectsTimeout = setTimeout(() => {
       if (isMounted) {
@@ -95,7 +95,7 @@ export function GlitchName({
         return () => clearInterval(interval);
       }
     }, 200);
-    
+
     const rotationTimer = setTimeout(() => {
       if (isMounted) {
         const interval = setInterval(rotateText, rotationInterval);

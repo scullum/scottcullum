@@ -1,3 +1,5 @@
+"use client";
+
 import GlitchCard from "@/components/glitch-card";
 import { FileText } from "lucide-react";
 import aboutData from "@/data/about.json";
@@ -11,9 +13,9 @@ const SkewedContainer = dynamic(() => import("@/components/skewed-container"), {
   ssr: true,
 });
 
-// Import the DistortedImage component dynamically
-const DistortedImage = dynamic(() => import("@/components/distorted-image"), {
-  ssr: true,
+// Import the RotatingProfileImage component dynamically
+const RotatingProfileImage = dynamic(() => import("@/components/rotating-profile-image"), {
+  ssr: false // Use client-side only to ensure proper rotation
 });
 
 export default function About() {
@@ -37,14 +39,10 @@ export default function About() {
         <div>
           <GlitchCard className="h-full">
             <div className="relative w-full h-[400px] mb-4 overflow-hidden">
-              <DistortedImage
-                src="/me.webp"
+              <RotatingProfileImage
                 alt="Scott M. Cullum"
-                width={600}
-                height={800}
-                className="w-full h-full object-cover"
-                distortionIntensity="medium"
-                priority
+                interval={7000} // Rotate every 7 seconds
+                className="w-full h-full"
               />
             </div>
           </GlitchCard>

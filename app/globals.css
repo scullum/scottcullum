@@ -9,12 +9,12 @@
   --noise-opacity: 0.05;
 
   /* Dark mode variables (default) */
-  --background: #000000;
+  --background: #1a1a1a; /* Dark gray background */
   --foreground: #ffffff;
   --muted: rgba(255, 255, 255, 0.7);
   --muted-foreground: rgba(255, 255, 255, 0.5);
   --border: rgba(255, 255, 255, 0.2);
-  --card: rgba(0, 0, 0, 0.8);
+  --card: rgba(26, 26, 26, 0.8); /* Updated to match background */
   --card-foreground: #ffffff;
 }
 
@@ -52,6 +52,18 @@
 }
 
 @layer base {
+  /* Global cursor styles for all interactive elements */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"],
+  select,
+  summary,
+  .interactive {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+  }
   body {
     @apply antialiased;
     background-color: var(--background);
@@ -145,6 +157,10 @@
   a {
     color: var(--accent);
     transition: all 0.2s;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 1;
   }
 
   main {
@@ -182,6 +198,7 @@
     border: 2px solid white;
     transform: translate(-0.25rem, -0.25rem);
     pointer-events: none;
+    z-index: 0;
   }
 
   /* Updated nav-link styles to remove underline and accent color on hover */
@@ -191,6 +208,9 @@
     color: white;
     transition: color 0.2s;
     position: relative;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    z-index: 2;
   }
 
   .nav-link::after {
@@ -300,6 +320,10 @@
 /* No underline for thought cards */
 .thought-card-link {
   text-decoration: none !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 1;
 }
 .thought-card-link:hover {
   text-decoration: none !important;
