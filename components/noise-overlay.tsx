@@ -157,10 +157,11 @@ const NoiseOverlay = ({ imagesOnly = true }: NoiseOverlayProps) => {
     >
       <canvas
         ref={canvasRef}
-        className={`${imagesOnly ? 'absolute w-full h-full' : 'absolute inset-0 w-full h-full opacity-20'}`}
+        className={`${imagesOnly ? 'absolute w-full h-full' : 'absolute inset-0 w-full h-full'}`}
         style={{
           mixBlendMode: isDarkMode ? "overlay" : "multiply",
-          opacity: isDarkMode ? 0.2 : 0.1,
+          opacity: isDarkMode ? 0.2 : 0.05,
+          filter: isDarkMode ? 'none' : 'contrast(0.8) brightness(1.1)',
         }}
         aria-hidden="true"
       />

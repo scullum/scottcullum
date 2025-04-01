@@ -28,6 +28,21 @@
   --card: rgba(245, 240, 225, 0.8); /* Translucent craft paper */
   --card-foreground: #2d2a24; /* Dark brown for card text */
   --nav-border: rgba(0, 0, 0, 0.1); /* Thin black border for navigation */
+  --noise-opacity: 0.03; /* Reduced noise opacity for light mode */
+}
+
+/* Additional light mode styles */
+.light-mode .xerox-bg {
+  opacity: 0.05; /* Reduce texture opacity in light mode */
+  mix-blend-mode: multiply; /* Different blend mode for light background */
+}
+
+.light-mode .punk-border::after {
+  border-color: rgba(45, 42, 36, 0.5); /* Darker border for light mode */
+}
+
+.light-mode .nav-link::after {
+  background-color: var(--foreground);
 }
 
 /* Add this to ensure the accent color is applied */
