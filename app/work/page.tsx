@@ -23,12 +23,28 @@ interface WorkItemProps {
     summary: string;
     image: string;
     link?: string;
+    hasPage?: boolean;
+    aspectRatio?: string;
   };
   isAnimationEnabled: boolean;
 }
 
 // WorkItem component for individual project cards
 function WorkItem({ project, isAnimationEnabled }: WorkItemProps) {
+  // Calculate aspect ratio style based on the project's aspectRatio property
+  const getAspectRatioStyle = () => {
+    if (!project.aspectRatio) return {};
+    
+    // Convert aspect ratio string (e.g., "16/9") to padding-bottom percentage
+    const [width, height] = project.aspectRatio.split('/');
+    const paddingBottom = `${(parseInt(height) / parseInt(width)) * 100}%`;
+    
+    return {
+      paddingBottom,
+      height: 0
+    };
+  };
+
   const CardContent = (
     <GlitchCard
       className="h-full flex flex-col"
@@ -36,7 +52,10 @@ function WorkItem({ project, isAnimationEnabled }: WorkItemProps) {
       glitchIntensity="light"
       glitchOnHover={true}
     >
-      <div className="relative w-full h-64 mb-6 overflow-hidden punk-border">
+      <div 
+        className="relative w-full mb-6 overflow-hidden punk-border"
+        style={project.aspectRatio ? getAspectRatioStyle() : { height: '16rem' }}
+      >
         <Image
           src={project.image}
           alt={project.title}
@@ -47,15 +66,13 @@ function WorkItem({ project, isAnimationEnabled }: WorkItemProps) {
 
       <div className="flex-1 flex flex-col">
         <div className="flex-1">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h2>
-          <p className="font-mono text-accent mb-4">{project.subtitle}</p>
-          {project.summary !== "tk" && (
-            <p className="text-lg mb-6">{project.summary}</p>
-          )}
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-accent">{project.title}</h2>
+          <p className="font-mono mb-4">{project.subtitle}</p>
+          <p className="text-lg mb-6 text-[var(--foreground)]">{project.summary}</p>
         </div>
 
         <div className="mt-auto">
-          {project.link ? (
+          {!project.hasPage && project.link ? (
             <a
               href={project.link}
               target="_blank"

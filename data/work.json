@@ -4,89 +4,119 @@
       "id": "wwf-together",
       "title": "WWF Together",
       "subtitle": "Interactive experience for wildlife conservation",
-      "summary": "tk",
-      "image": "/placeholders/wwf-together.svg",
-      "link": "https://akqa.com/work/wwf/together"
+      "summary": "Led the development of an award-winning interactive experience that connected users with endangered species through immersive storytelling and innovative interactions.",
+      "image": "/work/wwf-together.webp",
+      "link": "https://akqa.com/work/wwf/together",
+      "hasPage": false,
+      "aspectRatio": "4/3"
     },
     {
       "id": "verizon-express",
       "title": "Verizon Express Store",
       "subtitle": "Streamlined digital retail experience",
-      "summary": "tk",
-      "image": "/placeholders/verizon.svg",
-      "link": "https://www.akqa.com/work/verizon/verizon-express/"
+      "summary": "Designed and implemented a streamlined digital retail experience that simplified the purchase process for Verizon customers while maintaining brand consistency.",
+      "image": "/work/verizon.webp",
+      "link": "https://www.akqa.com/work/verizon/verizon-express/",
+      "hasPage": false,
+      "aspectRatio": "4/3"
     },
     {
       "id": "expressable",
       "title": "Expressable",
       "subtitle": "Digital speech therapy platform",
-      "summary": "tk",
-      "image": "/placeholders/expressable.svg",
-      "link": "https://www.expressable.com"
+      "summary": "Created a comprehensive digital platform for speech therapy services, enabling remote therapy sessions and progress tracking for patients of all ages.",
+      "image": "/work/expressable.webp",
+      "link": "https://www.expressable.com",
+      "hasPage": false,
+      "aspectRatio": "4/3"
     },
     {
       "id": "fallout-4",
       "title": "Fallout 4",
       "subtitle": "Post-apocalyptic gaming experience",
-      "summary": "tk",
-      "image": "/placeholders/fallout.svg",
-      "link": "https://fallout.bethesda.net/en/games/fallout-4"
+      "summary": "Contributed to the digital marketing strategy and interactive experiences for Bethesda's Fallout 4 launch, driving engagement and anticipation.",
+      "image": "/work/fallout.jpg",
+      "link": "https://fallout.bethesda.net/en/games/fallout-4",
+      "hasPage": false,
+      "aspectRatio": "16/9"
     },
     {
       "id": "audi-usa",
       "title": "AudiUSA.com",
       "subtitle": "Premium automotive digital experience",
-      "summary": "tk",
-      "image": "/placeholders/audi.svg",
-      "link": "https://www.akqa.com/work/audi/audiusa-com/"
+      "summary": "Redesigned the digital flagship for Audi USA, creating an immersive experience that balanced brand luxury with practical vehicle exploration and purchasing tools.",
+      "image": "/work/audi.webp",
+      "link": "https://www.akqa.com/work/audi/audiusa-com/",
+      "hasPage": false,
+      "aspectRatio": "16/9"
     },
     {
       "id": "watch-dogs",
       "title": "Watch Dogs Digital Shadow",
       "subtitle": "Interactive digital privacy experience",
-      "summary": "tk",
-      "image": "/placeholders/watchdogs.svg",
-      "link": "https://www.youtube.com/watch?v=Dvn5aegzcts"
+      "summary": "Developed a viral marketing campaign for Ubisoft's Watch Dogs that demonstrated digital privacy vulnerabilities by analyzing users' social media presence.",
+      "image": "/work/watchdogs.jpg",
+      "link": "https://www.youtube.com/watch?v=Dvn5aegzcts",
+      "hasPage": false,
+      "aspectRatio": "16/9"
     },
     {
       "id": "a6-ipad",
       "title": "A6 iPad",
       "subtitle": "Luxury automotive tablet experience",
-      "summary": "tk",
-      "image": "/placeholders/a6ipad.svg",
-      "link": "https://vimeo.com/85510381"
+      "summary": "Created an innovative iPad application for Audi that showcased the A6 model's features and technology through interactive 3D visualizations and personalized configurations.",
+      "image": "/work/a6ipad.webp",
+      "link": "https://vimeo.com/85510381",
+      "hasPage": false,
+      "aspectRatio": "4/3"
     },
     {
-      "id": "gap-stylestream",
+      "id": "volvo",
+      "title": "Volvo XC90",
+      "subtitle": "Immersive automotive experience",
+      "summary": "Designed and developed an immersive digital experience for the Volvo XC90 launch, highlighting the vehicle's innovative safety features and Scandinavian design.",
+      "image": "/work/volvo.jpg",
+      "hasPage": true,
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "stylestream",
       "title": "Gap 1969 Stylestream",
       "subtitle": "Fashion digital content platform",
-      "summary": "tk",
-      "image": "/placeholders/stylestream.svg",
-      "link": "https://www.shirabogart.com/gap-1969-stream"
+      "summary": "Built a dynamic content platform for Gap that showcased their 1969 denim collection through curated fashion stories and interactive lookbooks.",
+      "image": "/work/stylestream.jpg",
+      "link": "https://www.shirabogart.com/gap-1969-stream",
+      "hasPage": false,
+      "aspectRatio": "3/2"
     },
     {
       "id": "shopify-ventures",
       "title": "Shopify Ventures",
       "subtitle": "E-commerce investment platform",
-      "summary": "tk",
-      "image": "/placeholders/shopifyvc.svg",
-      "link": "https://shopify.vc/"
+      "summary": "Developed the digital presence for Shopify's venture capital arm, creating a platform that highlighted their investment strategy and portfolio companies.",
+      "image": "/work/shopifyvc.png",
+      "link": "https://shopify.vc/",
+      "hasPage": false,
+      "aspectRatio": "16/9"
     },
     {
       "id": "guarantors",
       "title": "Guarantors",
       "subtitle": "Rental guarantee financial platform",
-      "summary": "tk",
-      "image": "/placeholders/guarantors.svg",
-      "link": "https://www.theguarantors.com/"
+      "summary": "Led the technical strategy for a fintech platform that revolutionized the rental market by providing guarantees for tenants and landlords, simplifying the rental process.",
+      "image": "/work/theguarantors.png",
+      "hasPage": true,
+      "aspectRatio": "16/9"
     },
     {
       "id": "lifelines",
       "title": "Lifelines",
       "subtitle": "Healthcare digital platform",
-      "summary": "tk",
-      "image": "/placeholders/lifelines.svg",
-      "link": "https://www.lifelines.com/"
+      "summary": "Created a healthcare platform that connected patients with specialized medical services, featuring secure telehealth capabilities and personalized care plans.",
+      "image": "/work/lifelines.png",
+      "link": "https://www.lifelines.com/",
+      "hasPage": false,
+      "aspectRatio": "16/9"
     }
   ]
 }
