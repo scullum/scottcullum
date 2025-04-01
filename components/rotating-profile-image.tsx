@@ -15,16 +15,10 @@ interface RotatingProfileImageProps {
 export function RotatingProfileImage({
   className = "",
   interval = 5000, // Default to 5 seconds
-  alt
+  alt,
 }: RotatingProfileImageProps) {
   // List of profile images to rotate through
-  const profileImages = [
-    "/me.webp",
-    "/me.jpg",
-    "/me2.jpg",
-    "/me3.jpg",
-    "/me4.jpg"
-  ];
+  const profileImages = ["/me.jpg", "/me2.jpg", "/me3.jpg", "/me4.jpg"];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -33,13 +27,11 @@ export function RotatingProfileImage({
     // Set up rotation interval
     const rotationTimer = setInterval(() => {
       setIsTransitioning(true);
-      
+
       // Wait for fade-out transition to complete
       setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => 
-          (prevIndex + 1) % profileImages.length
-        );
-        
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % profileImages.length);
+
         // Wait a bit then fade back in
         setTimeout(() => {
           setIsTransitioning(false);

@@ -73,12 +73,12 @@ function PageWrapper({ children, className = "" }: PageWrapperProps) {
       }
 
       // Process children of this element if they exist
-      if (children.props && 'children' in children.props) {
+      if (children.props && "children" in children.props) {
         const newChildren = applySkewToChildren(children.props.children as ReactNode);
         // Create a properly typed clone of the element with new children
         return React.cloneElement(children, { ...children.props }, newChildren);
       }
-      
+
       // If no children props, just return the element as is
       return children;
     }
