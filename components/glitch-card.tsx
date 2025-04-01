@@ -26,7 +26,7 @@ const GlitchCard = ({
   const hoverClass = glitchEffect && glitchOnHover ? `hover:${glitchClass}` : glitchEffect ? glitchClass : "";
   
   return (
-    <div className={`punk-card ${hoverClass} ${className}`}>{children}</div>
+    <div className={`punk-card ${hoverClass} ${className} cursor-pointer interactive`}>{children}</div>
   );
 };
 

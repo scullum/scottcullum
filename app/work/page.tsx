@@ -2,9 +2,8 @@
 
 import GlitchCard from "@/components/glitch-card";
 import workData from "@/data/work.json";
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { SkewedH1 } from "@/components/skewed-elements";
 import { useSettings } from "@/contexts/settings-context";
 import { useAccentColor } from "@/contexts/color-context";
@@ -68,7 +67,7 @@ export default function Work() {
                   {/* <p className="text-lg mb-6 text-[var(--foreground)]">{project.summary}</p> */}
                 </div>
                 <div className="mt-4">
-                  {!project.hasPage && project.link ? (
+                  {project.link ? (
                     <a
                       href={project.link}
                       target="_blank"
@@ -79,13 +78,9 @@ export default function Work() {
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   ) : (
-                    <Link
-                      href={`/work/${project.id}`}
-                      className="inline-flex items-center font-mono text-accent hover:underline"
-                    >
-                      View case study
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
+                    <span className="inline-flex items-center font-mono text-muted">
+                      Coming soon
+                    </span>
                   )}
                 </div>
               </div>
