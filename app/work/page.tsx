@@ -39,7 +39,7 @@ export default function Work() {
         </p>
       </SkewedContainer>
 
-      <div className="space-y-8 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         {workData.projects.map((project: ProjectType, index) => (
           <GlitchCard
             key={project.id}
@@ -48,21 +48,19 @@ export default function Work() {
             glitchIntensity="light"
             glitchOnHover={true}
           >
-            <div className="flex flex-col md:flex-row gap-6">
-              <div className="md:w-1/3 relative h-48 md:h-auto">
-                <div className="relative w-full h-full overflow-hidden punk-border">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className={`object-cover ${isAnimationEnabled ? "transition-transform duration-700 hover:scale-110" : ""}`}
-                  />
-                </div>
+            <div className="flex flex-col h-full">
+              <div className="relative w-full h-48 overflow-hidden punk-border">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className={`object-cover ${isAnimationEnabled ? "transition-transform duration-700 hover:scale-110" : ""}`}
+                />
               </div>
-              <div className="md:w-2/3 flex flex-col justify-between">
+              <div className="flex-1 flex flex-col justify-between p-4">
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2 text-accent">{project.title}</h2>
-                  <p className="font-mono mb-4">{project.subtitle}</p>
+                  <h2 className="text-xl md:text-2xl font-bold mb-2 text-accent">{project.title}</h2>
+                  <p className="font-mono text-sm mb-4">{project.subtitle}</p>
                   {/* Description hidden for now */}
                   {/* <p className="text-lg mb-6 text-[var(--foreground)]">{project.summary}</p> */}
                 </div>
