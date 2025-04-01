@@ -1,3 +1,5 @@
+"use client";
+
 import GlitchCard from "@/components/glitch-card";
 import { FileText } from "lucide-react";
 import aboutData from "@/data/about.json";
