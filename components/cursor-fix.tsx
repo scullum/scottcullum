@@ -19,7 +19,16 @@ export function CursorFix() {
         "input[type='reset']",
         "input[type='button']",
         "summary",
-        ".interactive"
+        ".interactive",
+        "[onclick]",
+        "[data-action]",
+        ".cursor-pointer",
+        ".punk-border a",
+        ".skewed-container a",
+        ".nav-item a",
+        ".footer a",
+        "[class*='link']",
+        "[class*='button']"
       ];
       
       // Apply styles to all matching elements
@@ -29,19 +38,35 @@ export function CursorFix() {
           (el as HTMLElement).style.cursor = "pointer";
         });
       });
+      
+      // Add a special class to the body to enable CSS cursor fixes
+      document.body.classList.add('cursor-fixes-enabled');
     };
 
     // Apply immediately
     applyHandCursor();
     
     // Set up a mutation observer to handle dynamically added elements
-    const observer = new MutationObserver(applyHandCursor);
+    const observer = new MutationObserver(mutations => {
+      // Only reapply if relevant nodes were added
+      const shouldReapply = mutations.some(mutation => 
+        mutation.type === 'childList' && mutation.addedNodes.length > 0
+      );
+      
+      if (shouldReapply) {
+        applyHandCursor();
+      }
+    });
+    
     observer.observe(document.body, { 
       childList: true, 
       subtree: true 
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove('cursor-fixes-enabled');
+    };
   }, []);
 
   // This component doesn't render anything

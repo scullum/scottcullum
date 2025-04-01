@@ -47,6 +47,15 @@ export default function Home() {
         </SkewedContainer>
 
         <div className="flex flex-col sm:flex-row gap-6">
+          <SkewedContainer intensity="medium" skewOnLoad={true}>
+            <Link
+              href="/about"
+              className="punk-border inline-flex items-center justify-center px-8 py-3 text-lg font-mono uppercase bg-black text-white hover:bg-accent hover:text-black transition-colors duration-200 no-underline"
+            >
+              About me
+            </Link>
+          </SkewedContainer>
+
           {features.showWork && (
             <SkewedContainer intensity="medium" skewOnLoad={true}>
               <Link

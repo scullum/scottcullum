@@ -5,7 +5,7 @@ import workData from "@/data/work.json";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { SkewedH1, SkewedH2 } from "@/components/skewed-elements";
+import { SkewedH1 } from "@/components/skewed-elements";
 import { useSettings } from "@/contexts/settings-context";
 import { useAccentColor } from "@/contexts/color-context";
 import dynamic from "next/dynamic";
@@ -29,13 +29,14 @@ interface ProjectType {
 export default function Work() {
   const { isAnimationEnabled } = useSettings();
   const { accentColor } = useAccentColor();
-  
+
   return (
     <div className="py-12">
       <SkewedContainer intensity="medium" skewOnLoad={true}>
         <SkewedH1 className="text-5xl md:text-6xl mb-8">Selected Work</SkewedH1>
         <p className="text-xl md:text-2xl max-w-3xl mb-16" style={{ color: accentColor }}>
-          A showcase of projects where I&apos;ve led technical strategy, innovation, and implementation across various industries and challenges.
+          A showcase of projects where I&apos;ve led technical strategy, innovation, and
+          implementation across various industries and challenges.
         </p>
       </SkewedContainer>
 
@@ -59,7 +60,9 @@ export default function Work() {
               </div>
               <div className="flex-1 flex flex-col justify-between p-4">
                 <div>
-                  <h2 className="text-xl md:text-2xl font-bold mb-2 text-accent">{project.title}</h2>
+                  <h2 className="text-xl md:text-2xl font-bold mb-2 text-accent">
+                    {project.title}
+                  </h2>
                   <p className="font-mono text-sm mb-4">{project.subtitle}</p>
                   {/* Description hidden for now */}
                   {/* <p className="text-lg mb-6 text-[var(--foreground)]">{project.summary}</p> */}

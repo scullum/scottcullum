@@ -6,7 +6,21 @@ button,
 .interactive,
 input[type="submit"],
 input[type="reset"],
-input[type="button"] {
+input[type="button"],
+summary,
+[onclick],
+[data-action],
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+/* Ensure links within components also have pointer cursor */
+.punk-border a,
+.skewed-container a,
+.nav-item a,
+.footer a,
+[class*="link"],
+[class*="button"] {
   cursor: pointer !important;
 }
 
@@ -19,4 +33,10 @@ input[type="button"] {
 *::before,
 *::after {
   pointer-events: none;
+}
+
+/* Force pointer cursor for specific elements that might be getting overridden */
+.punk-border,
+.skewed-container {
+  cursor: inherit;
 }

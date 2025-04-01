@@ -7,7 +7,10 @@ import { ColorProvider } from "@/contexts/color-context";
 export function ClientWrapper({ children }: { children: React.ReactNode }) {
   return (
     <ColorProvider>
-      <NoiseOverlay />
+      <NoiseOverlay imagesOnly={true} />
+      <div className="fixed inset-0 -z-10 w-full h-full overflow-hidden">
+        <div className="fixed inset-0 min-w-screen min-h-screen w-[100vw] h-[100vh] xerox-bg"></div>
+      </div>
       <Navigation />
       {children}
     </ColorProvider>
