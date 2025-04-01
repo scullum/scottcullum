@@ -1,0 +1,22 @@
+/* Direct cursor fix for all interactive elements */
+a, 
+button, 
+[role="button"],
+.nav-link,
+.interactive,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  cursor: pointer !important;
+}
+
+/* Ensure no other elements interfere with pointer events */
+* {
+  pointer-events: auto;
+}
+
+/* Reset pointer events for non-interactive pseudo-elements */
+*::before,
+*::after {
+  pointer-events: none;
+}
